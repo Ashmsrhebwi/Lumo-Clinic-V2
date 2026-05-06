@@ -1,0 +1,18 @@
+# React SPA Fallback for Hostinger (Apache)
+# ─────────────────────────────────────────
+# Serves index.html for any path that isn't a real file or directory.
+# This allows React Router (browser history mode) to handle client-side
+# routes like /dashboard, /blog/:slug, /treatment/:slug directly.
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Do not rewrite existing files (JS, CSS, images, fonts, etc.)
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Rewrite everything else to index.html (SPA entry point)
+    RewriteRule ^ index.html [L]
+</IfModule>
