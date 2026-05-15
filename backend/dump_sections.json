@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "label": {
+            "en": "Dental",
+            "ar": "\u0627\u0644\u0623\u0633\u0646\u0627\u0646",
+            "fr": "Dentaire",
+            "ru": "\u0421\u0442\u043e\u043c\u0430\u0442\u043e\u043b\u043e\u0433\u0438\u044f"
+        },
+        "order": 1,
+        "is_footer": true,
+        "is_active": true,
+        "created_at": "2026-03-30T01:29:21.000000Z",
+        "updated_at": "2026-03-30T01:29:21.000000Z"
+    },
+    {
+        "id": 2,
+        "label": {
+            "en": "Hair Transplant",
+            "ar": "\u0632\u0631\u0627\u0639\u0629 \u0627\u0644\u0634\u0639\u0631",
+            "fr": "Greffe de Cheveux",
+            "ru": "\u041f\u0435\u0440\u0435\u0441\u0430\u0434\u043a\u0430 \u0412\u043e\u043b\u043e\u0441"
+        },
+        "order": 2,
+        "is_footer": true,
+        "is_active": true,
+        "created_at": "2026-03-30T01:29:21.000000Z",
+        "updated_at": "2026-03-30T01:29:21.000000Z"
+    },
+    {
+        "id": 3,
+        "label": {
+            "en": "About Us",
+            "ar": "\u0645\u0646 \u0646\u062d\u0646",
+            "fr": "\u00c0 Propos",
+            "ru": "\u041e \u041d\u0430\u0633"
+        },
+        "order": 3,
+        "is_footer": true,
+        "is_active": true,
+        "created_at": "2026-03-30T01:29:21.000000Z",
+        "updated_at": "2026-03-30T01:29:21.000000Z"
+    }
+]

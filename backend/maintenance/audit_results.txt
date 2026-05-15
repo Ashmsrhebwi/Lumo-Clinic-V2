@@ -1,0 +1,15 @@
+--- CANONICAL TREATMENTS IN DB ---
+SLUG: dental-implant | ID: 20 | Title: Dental Implant | ContentSections: 0
+SLUG: hollywood-smile | ID: 21 | Title: Hollywood Smile | ContentSections: 0
+SLUG: male-hair-transplant | ID: 22 | Title: Male Hair Transplant | ContentSections: 0
+SLUG: female-hair-transplant | ID: 23 | Title: Female Hair Transplant | ContentSections: 0
+SLUG: beard-moustache-transplant | ID: 24 | Title: Beard & Moustache Transplant | ContentSections: 0
+SLUG: eyebrow-transplant | ID: 25 | Title: Eyebrow Transplant | ContentSections: 0
+
+--- NAVBAR RESOLUTION ---
+Target: Dental Implant | ActualLabel: Dental Implant | Path: /treatment/dental-implant | LinkedTreatment: dental-implant (ID: 20)
+Target: Hollywood Smile | ActualLabel: Hollywood Smile | Path: /treatment/hollywood-smile | LinkedTreatment: hollywood-smile (ID: 21)
+Target: Male Hair Transplant | ActualLabel: Male Hair Transplant | Path: /treatment/male-hair-transplant | LinkedTreatment: male-hair-transplant (ID: 22)
+Target: Female Hair Transplant | ActualLabel: Female Hair Transplant | Path: /treatment/female-hair-transplant | LinkedTreatment: female-hair-transplant (ID: 23)
+Target: Beard Moustache Transplant | ActualLabel: Beard & Moustache Transplant | Path: /treatment/beard-moustache-transplant | LinkedTreatment: beard-moustache-transplant (ID: 24)
+Target: Eyebrow Transplant | ActualLabel: Eyebrow Transplant | Path: /treatment/eyebrow-transplant | LinkedTreatment: eyebrow-transplant (ID: 25)

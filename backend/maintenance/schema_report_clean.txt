@@ -1,0 +1,51 @@
+
+--- treatments ---
+  slug (STRICT NOT NULL)
+  title (STRICT NOT NULL)
+  description (STRICT NOT NULL)
+  duration (STRICT NOT NULL)
+
+--- results ---
+  treatment_id (STRICT NOT NULL)
+  patient_name (STRICT NOT NULL)
+  story (STRICT NOT NULL)
+
+--- testimonials ---
+  patient_name (STRICT NOT NULL)
+  feedback (STRICT NOT NULL)
+
+--- articles ---
+  slug (STRICT NOT NULL)
+  title (STRICT NOT NULL)
+  category (STRICT NOT NULL)
+  excerpt (STRICT NOT NULL)
+  content (STRICT NOT NULL)
+  read_time (STRICT NOT NULL)
+
+--- doctors ---
+  name (STRICT NOT NULL)
+  specialty (STRICT NOT NULL)
+  languages (STRICT NOT NULL)
+  bio (STRICT NOT NULL)
+  specialties (STRICT NOT NULL)
+
+--- locations ---
+  city (STRICT NOT NULL)
+  country (STRICT NOT NULL)
+  address (STRICT NOT NULL)
+  phone (STRICT NOT NULL)
+  email (STRICT NOT NULL)
+  hours (STRICT NOT NULL)
+
+--- faqs ---
+  question (STRICT NOT NULL)
+  answer (STRICT NOT NULL)
+
+--- stats ---
+  label (STRICT NOT NULL)
+  value (STRICT NOT NULL)
+
+--- process_steps ---
+  title (STRICT NOT NULL)
+  description (STRICT NOT NULL)
+  icon_name (STRICT NOT NULL)

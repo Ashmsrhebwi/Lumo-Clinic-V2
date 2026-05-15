@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Doctors — Lumo Clinic</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- ══════════════ PREMIUM LOADER ══════════════ -->
+  <div id="premium-loader" class="premium-loader">
+    <div class="loader-bg-accent"></div>
+    <div class="loader-content">
+      <div class="loader-icon-wrapper">
+        <div class="loader-circle circle-1"></div>
+        <div class="loader-circle circle-2"></div>
+        <svg class="loader-sparkle" width="48" height="48" viewBox="0 0 24 24" fill="none"
+          xmlns="http://www.w3.org/2000/svg">
+          <path class="sparkle-path" d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z"
+            stroke="#0891b2" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
+          <circle cx="12" cy="12" r="2" fill="#0891b2" class="sparkle-dot" />
+        </svg>
+      </div>
+      <div class="loader-brand">
+        <h1 class="loader-title">LUMO <span>CLINIC</span></h1>
+        <div class="loader-divider"></div>
+        <p class="loader-tagline">Preparing your premium clinic experience…</p>
+      </div>
+      <div class="loader-progress">
+        <div class="loader-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════ MOBILE NAV DRAWER ══════════ -->
+  <div id="nav-overlay" class="nav-overlay" onclick="closeMobileMenu()"></div>
+  <div id="nav-drawer" class="nav-drawer">
+    <button class="nav-drawer-close" onclick="closeMobileMenu()" aria-label="Close menu">✕</button>
+    <div class="nav-drawer-logo">Lumo<span>.</span></div>
+    <ul class="nav-drawer-links">
+      <li><a href="index.html">Home</a></li>
+      <li class="has-sub">
+        <span onclick="toggleDrawerSub(this)">Dental</span>
+        <ul class="nav-drawer-sub">
+          <li><a href="dental-implant.html">Dental Implant</a></li>
+          <li><a href="hollywood-smile.html">Hollywood Smile</a></li>
+        </ul>
+      </li>
+      <li class="has-sub">
+        <span onclick="toggleDrawerSub(this)">Hair Transplant</span>
+        <ul class="nav-drawer-sub">
+          <li><a href="male-hair-transplant.html">Male Hair Transplant</a></li>
+          <li><a href="female-hair-transplant.html">Female Hair Transplant</a></li>
+          <li><a href="beard-moustache-transplant.html">Beard & Moustache</a></li>
+          <li><a href="eyebrow-transplant.html">Eyebrow Transplant</a></li>
+        </ul>
+      </li>
+      <li><a href="plastic-surgery.html">Plastic Surgery</a></li>
+      <li><a href="doctors.html" class="active">Doctors</a></li>
+      <li><a href="blog.html">Blog</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-drawer-cta">
+      <a class="btn-primary" href="free-consultation.html">Free Consultation →</a>
+    </div>
+  </div>
+
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a class="nav-logo" href="index.html">Lumo<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li>
+          <a href="javascript:void(0)">Dental</a>
+          <div class="dropdown">
+            <a href="dental-implant.html">Dental Implant</a>
+            <a href="hollywood-smile.html">Hollywood Smile</a>
+          </div>
+        </li>
+        <li>
+          <a href="javascript:void(0)">Hair Transplant</a>
+          <div class="dropdown">
+            <a href="male-hair-transplant.html">Male Hair Transplant</a>
+            <a href="female-hair-transplant.html">Female Hair Transplant</a>
+            <a href="beard-moustache-transplant.html">Beard & Moustache</a>
+            <a href="eyebrow-transplant.html">Eyebrow Transplant</a>
+          </div>
+        </li>
+        <li><a href="plastic-surgery.html">Plastic Surgery</a></li>
+        <li><a href="doctors.html" class="active">Doctors</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a class="btn-consult" href="free-consultation.html">Free Consultation</a></li>
+      </ul>
+      <button class="nav-mobile-toggle" onclick="toggleMobileMenu()">☰</button>
+    </div>
+  </nav>
+
+  <!-- ══════════════ WHATSAPP ══════════════ -->
+  <a class="wa-float" href="https://wa.me/905000000000" target="_blank" title="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg>
+  </a>
+
+  <!-- ══════════════ DOCTORS PAGE ══════════════ -->
+  <div class="page active">
+    <section class="page-hero" style="background:var(--white);">
+      <div class="container" style="text-align:center;">
+        <div class="label" style="justify-content:center; margin-bottom:24px;">Elite Medical Team</div>
+        <h1 class="fade-up">World-Class<br><em>Specialists</em></h1>
+        <p class="fade-up" style="max-width:700px; margin:24px auto 0;">Meet the masters of medical artistry. Our team consists of internationally acclaimed surgeons and dentists dedicated to precision and excellence.</p>
+      </div>
+    </section>
+
+    <!-- DOCTOR CARDS -->
+    <section class="doctors-list" style="padding:100px 0;">
+      <div class="container">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap:40px;">
+          
+          <!-- Doctor 1 -->
+          <div class="doctor-card fade-up">
+            <div class="doctor-image-frame" style="aspect-ratio:0.8; overflow:hidden; border-radius:24px; margin-bottom:32px;">
+              <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=800&q=80" alt="Dr. Alperen Lumo" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div class="doctor-info">
+              <div class="label" style="font-size:10px; margin-bottom:12px;">Chief Surgeon</div>
+              <h3 style="font-size:28px; margin-bottom:8px;">Dr. Alperen Lumo</h3>
+              <p style="color:var(--cyan); font-weight:600; margin-bottom:16px;">Plastic & Reconstructive Surgeon</p>
+              <div style="font-size:14px; color:var(--navy-600); line-height:1.6; margin-bottom:24px;">
+                With over 20 years of experience and 10,000+ successful procedures, Dr. Alperen is a world-renowned authority in Piezo Rhinoplasty and Body Contouring.
+              </div>
+              <div class="doctor-credentials" style="display:flex; gap:12px; margin-bottom:32px;">
+                <span style="padding:6px 12px; background:var(--ice-100); border-radius:4px; font-size:11px; font-weight:600;">EBOPRAS</span>
+                <span style="padding:6px 12px; background:var(--ice-100); border-radius:4px; font-size:11px; font-weight:600;">ISAPS</span>
+                <span style="padding:6px 12px; background:var(--ice-100); border-radius:4px; font-size:11px; font-weight:600;">ASPS</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor 2 -->
+          <div class="doctor-card fade-up" style="transition-delay:0.1s">
+            <div class="doctor-image-frame" style="aspect-ratio:0.8; overflow:hidden; border-radius:24px; margin-bottom:32px;">
+              <img src="https://images.unsplash.com/photo-1559839734-2b71f15367ef?auto=format&fit=crop&w=800&q=80" alt="Dr. Selin Demir" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div class="doctor-info">
+              <div class="label" style="font-size:10px; margin-bottom:12px;">Head of Dentistry</div>
+              <h3 style="font-size:28px; margin-bottom:8px;">Dr. Selin Demir</h3>
+              <p style="color:var(--cyan); font-weight:600; margin-bottom:16px;">Cosmetic Dentist & Implantologist</p>
+              <div style="font-size:14px; color:var(--navy-600); line-height:1.6; margin-bottom:24px;">
+                A master of Digital Smile Design, Dr. Selin has transformed thousands of smiles using elite E-Max veneers and advanced implant technology.
+              </div>
+              <div class="doctor-credentials" style="display:flex; gap:12px; margin-bottom:32px;">
+                <span style="padding:6px 12px; background:var(--ice-100); border-radius:4px; font-size:11px; font-weight:600;">AACD</span>
+                <span style="padding:6px 12px; background:var(--ice-100); border-radius:4px; font-size:11px; font-weight:600;">ITI Member</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Doctor 3 -->
+          <div class="doctor-card fade-up" style="transition-delay:0.2s">
+            <div class="doctor-image-frame" style="aspect-ratio:0.8; overflow:hidden; border-radius:24px; margin-bottom:32px;">
+              <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=800&q=80" alt="Dr. Kerem Yılmaz" style="width:100%; height:100%; object-fit:cover;">
+            </div>
+            <div class="doctor-info">
+              <div class="label" style="font-size:10px; margin-bottom:12px;">Hair Restoration Lead</div>
+              <h3 style="font-size:28px; margin-bottom:8px;">Dr. Kerem Yılmaz</h3>
+              <p style="color:var(--cyan); font-weight:600; margin-bottom:16px;">Hair Transplant Specialist</p>
+              <div style="font-size:14px; color:var(--navy-600); line-height:1.6; margin-bottom:24px;">
+                Specializing in high-density FUE and no-shave DHI, Dr. Kerem is recognized for his artistic hairline designs and exceptional graft survival rates.
+              </div>
+              <div class="doctor-credentials" style="display:flex; gap:12px; margin-bottom:32px;">
+                <span style="padding:6px 12px; background:var(--ice-100); border-radius:4px; font-size:11px; font-weight:600;">ISHRS</span>
+                <span style="padding:6px 12px; background:var(--ice-100); border-radius:4px; font-size:11px; font-weight:600;">World FUE</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST INDICATORS -->
+    <section style="background:var(--bg-alt); padding:80px 0;">
+        <div class="container">
+            <div style="display:flex; justify-content:center; align-items:center; gap:80px; flex-wrap:wrap; opacity:0.6;">
+                <span style="font-family:var(--font-display); font-size:24px; color:var(--navy-900);">JCI ACCREDITED</span>
+                <span style="font-family:var(--font-display); font-size:24px; color:var(--navy-900);">ISAPS MEMBER</span>
+                <span style="font-family:var(--font-display); font-size:24px; color:var(--navy-900);">EBOPRAS CERTIFIED</span>
+                <span style="font-family:var(--font-display); font-size:24px; color:var(--navy-900);">AACD DENTISTRY</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section style="padding:160px 0; background:var(--white);">
+        <div class="container" style="text-align:center;">
+            <div class="fade-up">
+                <h2 style="font-size:56px; margin-bottom:32px;">Ready for Your <em>Transformation?</em></h2>
+                <p style="max-width:600px; margin:0 auto 48px; color:var(--navy-600);">Schedule a free online consultation with our specialists and receive a personalized treatment plan within 24 hours.</p>
+                <a class="btn-primary" href="free-consultation.html">Book Free Consultation →</a>
+            </div>
+        </div>
+    </section>
+  </div>
+
+  <!-- ══════════════ SHARED FOOTER ══════════════ -->
+  <footer id="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-logo">Lumo<span>.</span></div>
+          <p class="footer-tagline">World-class dental, hair restoration, and aesthetic surgery in Istanbul. Trusted by
+            international patients from over 48 countries for life-changing results.</p>
+          <div class="footer-socials">
+            <a class="social-btn" href="#" title="Instagram">◎</a>
+            <a class="social-btn" href="#" title="Facebook">◈</a>
+            <a class="social-btn" href="#" title="YouTube">▷</a>
+            <a class="social-btn" href="#" title="TikTok">✦</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Treatments</h4>
+          <ul class="footer-links">
+            <li><a href="dental-implant.html">Dental Implants</a></li>
+            <li><a href="hollywood-smile.html">Hollywood Smile</a></li>
+            <li><a href="male-hair-transplant.html">Male Hair Transplant</a></li>
+            <li><a href="female-hair-transplant.html">Female Hair Transplant</a></li>
+            <li><a href="plastic-surgery.html">Plastic Surgery</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Clinic</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">About Lumo</a></li>
+            <li><a href="doctors.html">Our Doctors</a></li>
+            <li><a href="blog.html">Expert Insights</a></li>
+            <li><a href="contact.html">Patient Support</a></li>
+            <li><a href="free-consultation.html">Free Consultation</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul class="footer-links">
+            <li style="color:rgba(255,255,255,0.5); font-size:14px; line-height:1.6;">
+              Abdi İpekçi Cad. No:12<br>Nişantaşı, Istanbul, Turkey
+            </li>
+            <li><a href="tel:+902120000000">+90 212 000 0000</a></li>
+            <li><a href="mailto:hello@lumoclinic.com">hello@lumoclinic.com</a></li>
+            <li><a href="https://wa.me/905000000000" target="_blank" style="color:var(--cyan)">WhatsApp Support →</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Lumo Clinic. Precision Medical Excellence.</span>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

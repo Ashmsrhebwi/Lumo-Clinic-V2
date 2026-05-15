@@ -1,0 +1,25 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Pass auth headers
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    RewriteCond %{HTTP:x-xsrf-token} .
+    RewriteRule .* - [E=HTTP_X_XSRF_TOKEN:%{HTTP:x-xsrf-token}]
+
+    # 1) Serve real files/folders in public_html first
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # 2) Map /storage/... to Laravel storage files
+    RewriteRule ^storage/(.*)$ backend/storage/app/public/$1 [L]
+
+    # 3) API -> Laravel
+    RewriteCond %{REQUEST_URI} ^/api
+    RewriteRule ^api(.*)$ backend/public/index.php [L]
+
+    # 4) React SPA fallback
+    RewriteRule ^ index.html [L]
+</IfModule>

@@ -1,0 +1,146 @@
+{
+    "treatments": [],
+    "results": [
+        {
+            "id": 1,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: patient_name, Empty field: story, All translations empty for patient_name"
+        },
+        {
+            "id": 4,
+            "name_or_title": "{\"en\":\"New Result\",\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Contains keyword 'new result' in patient_name, Empty field: story"
+        },
+        {
+            "id": 5,
+            "name_or_title": "{\"en\":\"New Result\",\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Contains keyword 'new result' in patient_name, Empty field: story"
+        }
+    ],
+    "testimonials": [
+        {
+            "id": 12,
+            "name_or_title": "{\"en\":\"New Patient\",\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Contains keyword 'new patient' in patient_name, Empty field: feedback, All translations empty for feedback"
+        },
+        {
+            "id": 14,
+            "name_or_title": "{\"en\":\"New Patient\",\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Contains keyword 'new patient' in patient_name, Empty field: feedback, All translations empty for feedback"
+        }
+    ],
+    "doctors": [
+        {
+            "id": 1,
+            "name_or_title": "\"sd\"",
+            "reasons": "Contains keyword 'test' in bio"
+        },
+        {
+            "id": 3,
+            "name_or_title": "\"New Doctor\"",
+            "reasons": "Contains keyword 'new doctor' in name, Empty field: bio"
+        },
+        {
+            "id": 5,
+            "name_or_title": "\"New Doctor\"",
+            "reasons": "Contains keyword 'new doctor' in name, Empty field: bio"
+        },
+        {
+            "id": 6,
+            "name_or_title": "\"New Doctor\"",
+            "reasons": "Contains keyword 'new doctor' in name, Empty field: bio"
+        },
+        {
+            "id": 7,
+            "name_or_title": "\"New Doctor\"",
+            "reasons": "Contains keyword 'new doctor' in name, Empty field: bio"
+        },
+        {
+            "id": 8,
+            "name_or_title": "\"New Doctor\"",
+            "reasons": "Contains keyword 'new doctor' in name, Empty field: bio"
+        },
+        {
+            "id": 9,
+            "name_or_title": "\"New Doctor\"",
+            "reasons": "Contains keyword 'new doctor' in name, Empty field: bio"
+        }
+    ],
+    "locations": [],
+    "faqs": [
+        {
+            "id": 7,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: question, Empty field: answer, All translations empty for question"
+        },
+        {
+            "id": 8,
+            "name_or_title": "{\"en\":\"\",\"ar\":\"\",\"fr\":\"\",\"ru\":\"\"}",
+            "reasons": "Empty field: question, Contains keyword 'test' in answer, All translations empty for question"
+        },
+        {
+            "id": 10,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: question, Empty field: answer, All translations empty for question"
+        }
+    ],
+    "stats": [
+        {
+            "id": 5,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: label, All translations empty for label"
+        },
+        {
+            "id": 10,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: label, All translations empty for label"
+        },
+        {
+            "id": 11,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: label, All translations empty for label"
+        },
+        {
+            "id": 12,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: label, All translations empty for label"
+        },
+        {
+            "id": 13,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: label, All translations empty for label"
+        },
+        {
+            "id": 14,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: label, All translations empty for label"
+        }
+    ],
+    "process_steps": [
+        {
+            "id": 5,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: title, All translations empty for title"
+        },
+        {
+            "id": 7,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: title, Empty field: description, All translations empty for title"
+        },
+        {
+            "id": 8,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: title, All translations empty for title"
+        },
+        {
+            "id": 9,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: title, Empty field: description, All translations empty for title"
+        },
+        {
+            "id": 11,
+            "name_or_title": "{\"en\":null,\"ar\":null,\"fr\":null,\"ru\":null}",
+            "reasons": "Empty field: title, Empty field: description, All translations empty for title"
+        }
+    ]
+}
