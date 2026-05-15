@@ -38,13 +38,13 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
           }}
         >
           <span className="text-2xl font-black tracking-tighter text-white" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
-            GC
+            LC
           </span>
         </div>
 
         {/* Text */}
         <p className="relative z-10 text-[10px] font-black tracking-[0.4em] uppercase text-white/25 mb-2">
-          Gravity Clinic
+          Lumo Clinic
         </p>
         <p className="relative z-10 text-sm font-medium text-white/40" style={{ fontFamily: 'Inter, system-ui, sans-serif' }}>
           Preparing your experience&hellip;

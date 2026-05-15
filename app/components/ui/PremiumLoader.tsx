@@ -1,121 +1,119 @@
 import React from 'react';
-import { motion } from 'motion/react';
+import { motion, AnimatePresence } from 'motion/react';
 import { useLanguage } from '../../context/LanguageContext';
+import { useDashboard } from '../../context/DashboardContext';
 
 interface PremiumLoaderProps {
   fullScreen?: boolean;
 }
 
 /**
- * PremiumLoader component provides a high-end, cinematic loading experience
- * specifically tailored for the Gravity Clinic brand. 
- * 
- * Features:
- * - Breathing atmospheric background
- * - Elegant logo fade and scale-in
- * - High-precision motion easing
- * - Glassmorphism effects
+ * PremiumLoader component: Ultra-minimal, high-end luxury medical aesthetic.
+ * Focuses on calm, expensive-feeling motion and pure typography.
  */
 export function PremiumLoader({ fullScreen = true }: PremiumLoaderProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  
+  // Safe access to Dashboard Context
+  let dashboardState: any = null;
+  try {
+    const context = useDashboard();
+    dashboardState = context?.state;
+  } catch (e) {
+    // Fallback if context is not ready
+  }
+
+  const clinicName = dashboardState?.branding?.name?.[language] || 
+                    dashboardState?.branding?.name?.en || 
+                    "Lumo Clinic";
+  const logoUrl = dashboardState?.branding?.logo;
 
   return (
     <div
       className={`
         ${fullScreen ? 'fixed inset-0 z-[9999]' : 'relative w-full h-full min-h-[400px]'}
         flex flex-col items-center justify-center 
-        bg-[#0B0A21] overflow-hidden
+        bg-[#FFFFFF] overflow-hidden
       `}
     >
-      {/* Dynamic Background Atmospheric Layer */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{
-          opacity: [0.15, 0.3, 0.15],
-          scale: [1, 1.1, 1],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle at 50% 50%, #F28522 0%, transparent 70%)',
-          filter: 'blur(100px)'
-        }}
-      />
+      {/* Ultra-subtle luxury grid texture */}
+      <div className="absolute inset-0 bg-navbar-grid opacity-[0.03] pointer-events-none" />
+      
+      {/* Minimal Pinpoint Glow */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(8,145,178,0.03)_0%,transparent_70%)] pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center">
-        {/* Logo Reveal Container */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9, y: 10 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{
-            duration: 1.2,
-            ease: [0.22, 1, 0.36, 1], // Custom "luxury" cubic bezier
-          }}
-          className="relative mb-12"
-        >
-          {/* Subtle Outer Glow */}
-          <div className="absolute inset-0 bg-primary/20 rounded-full blur-3xl animate-pulse" />
-
-          {/* Glassmorphism Badge for the logo */}
-          <div className="relative w-24 h-24 sm:w-32 sm:h-32 rounded-[2.5rem] bg-white/5 backdrop-blur-2xl border border-white/10 shadow-3xl flex items-center justify-center p-6 overflow-hidden">
-            {/* Shimmer sweep effect */}
-            <motion.div
-              animate={{ x: ['100%', '-100%'] }}
-              transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -skew-x-12"
-            />
-
-            <img
-              src="https://gravity-clinic.com/storage/uploads/1775426603_gravity-logo-navbar-dark-1200.png"
-              alt="Gravity Clinic"
-              className="w-full h-full object-contain relative z-10"
-            />
-          </div>
-        </motion.div>
-
-        {/* Brand Text Content */}
+        {/* Minimal Logo Presentation */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.4, ease: "easeOut" }}
+          transition={{ duration: 1.5, ease: [0.25, 0.1, 0.25, 1] }}
+          className="mb-6 h-12 flex items-center justify-center"
+        >
+          {logoUrl ? (
+            <motion.img
+              src={logoUrl}
+              alt={clinicName}
+              animate={{ 
+                opacity: [0.8, 1, 0.8],
+              }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+              className="h-full w-auto object-contain grayscale-[0.2] brightness-[1.05]"
+            />
+          ) : (
+            <span className="text-2xl font-serif font-medium tracking-tight text-[#0B1C2D]">
+              Lumo<span className="text-[#0891B2]">.</span>
+            </span>
+          )}
+        </motion.div>
+
+        {/* Dynamic Clinic Name - Elegant Serif */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.4 }}
           className="text-center"
         >
-          <h2 className="text-white text-xl sm:text-2xl font-black tracking-[0.2em] uppercase mb-4 opacity-90">
-            Gravity Clinic
+          <h2 className="text-[#0B1C2D] text-lg sm:text-xl font-serif font-medium tracking-[0.02em] mb-1">
+            {clinicName}
           </h2>
-
-          {/* Elegant Loading Indicator */}
-          <div className="flex items-center justify-center gap-1.5 h-1">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                animate={{
-                  opacity: [0.3, 1, 0.3],
-                  scaleY: [1, 2, 1]
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  delay: i * 0.2,
-                  ease: "easeInOut"
-                }}
-                className="w-10 h-[2px] bg-primary/60 rounded-full"
-              />
-            ))}
-          </div>
+          <motion.p 
+            animate={{ opacity: [0.3, 0.6, 0.3] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="text-[#0891B2] text-[10px] font-bold uppercase tracking-[0.4em] pl-[0.4em]"
+          >
+            {t('loading.preparing') || "Preparing your experience"}
+          </motion.p>
         </motion.div>
+
+        {/* Ultra-Thin Elegant Progress Line */}
+        <div className="mt-12 w-40 sm:w-56 h-[1px] bg-[#0B1C2D]/[0.06] relative overflow-hidden rounded-full">
+          <motion.div
+            initial={{ left: '-100%' }}
+            animate={{ left: '100%' }}
+            transition={{
+              duration: 3,
+              repeat: Infinity,
+              ease: [0.45, 0, 0.55, 1],
+            }}
+            className="absolute top-0 bottom-0 w-1/2 bg-gradient-to-r from-transparent via-[#0891B2]/40 to-transparent"
+          />
+        </div>
       </div>
 
-      {/* Modern bottom accent */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-30">
-        <span className="text-[10px] text-white font-black tracking-[0.5em] uppercase">
-          Excellence Defined
+      {/* Subtle Bottom Identity */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.15 }}
+        transition={{ delay: 1.5, duration: 1 }}
+        className="absolute bottom-12 left-1/2 -translate-x-1/2"
+      >
+        <span className="text-[9px] text-[#0B1C2D] font-bold tracking-[0.8em] uppercase whitespace-nowrap pl-[0.8em]">
+          Excellence
         </span>
-      </div>
+      </motion.div>
     </div>
   );
 }
+
+

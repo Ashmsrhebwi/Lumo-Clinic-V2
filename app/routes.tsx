@@ -27,7 +27,9 @@ export const router = createBrowserRouter([
       
       // Specialist Treatment Routes (Fixed Slug Mappings)
       { path: 'treatment/:slug', lazy: async () => ({ Component: (await import('./pages/TreatmentDetailPage')).TreatmentDetailPage }) },
+      { path: 'treatments', element: <Navigate to="/#treatments" replace /> },
       { path: 'contact-us', element: <Navigate to="/contact" replace /> },
+      { path: 'plastic-surgery', lazy: async () => ({ Component: (await import('./pages/PlasticSurgery')).PlasticSurgery }) },
 
       { path: 'hollywood-smile', element: <Navigate to="/treatment/hollywood-smile" replace /> },
       { path: 'hair/male', element: <Navigate to="/treatment/male-hair-transplant" replace /> },

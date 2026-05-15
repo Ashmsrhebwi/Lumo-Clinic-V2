@@ -5,6 +5,7 @@ import { Eye, EyeOff, Mail, Lock, ChevronRight, AlertCircle, Loader2 } from 'luc
 import { useAuth } from '../../context/AuthContext';
 import { useLanguage } from '../../context/LanguageContext';
 import { toast } from 'sonner';
+import { sanitizeText } from '../../lib/demoUtils';
 
 export function Login() {
   const { t, language } = useLanguage();
@@ -107,7 +108,7 @@ export function Login() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className={`w-full bg-white/[0.03] border ${errors.email ? 'border-red-500/30' : 'border-white/10 focus:border-primary/50'} rounded-2xl py-4 pl-12 pr-4 text-white placeholder:text-white/10 outline-none transition-all focus:bg-white/[0.06] focus:ring-4 focus:ring-primary/5`}
-                    placeholder="admin@gravity-clinic.com"
+                    placeholder={sanitizeText("admin@gravity-clinic.com")}
                   />
                 </div>
                 {errors.email && <p className="text-[10px] text-red-400 font-bold px-1">{errors.email}</p>}
@@ -178,7 +179,7 @@ export function Login() {
         </div>
 
         <p className="text-center mt-10 text-white/20 text-xs font-medium tracking-wide">
-          &copy; 2026 Gravity Clinic Global &bull; {t('dashboard.premium.access')}
+          &copy; 2026 {sanitizeText('Gravity Clinic Global')} &bull; {t('dashboard.premium.access')}
         </p>
       </motion.div>
     </div>

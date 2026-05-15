@@ -7,6 +7,7 @@ import { useDashboard } from '../context/DashboardContext';
 import { BeforeAfterSlider } from '../components/BeforeAfterSlider';
 import { BlogInsights } from '../components/BlogInsights';
 import { EditorialGrid } from '../components/EditorialGrid';
+import { sanitizeText } from '../lib/demoUtils';
 
 const heroImg = 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?auto=format&fit=crop&q=80&w=1200';
 const ctaImg = 'https://images.unsplash.com/photo-1599351431202-1e0f0137899a?auto=format&fit=crop&q=80&w=800';
@@ -48,8 +49,8 @@ export function Hair() {
         subtitle: { en: 'Pioneering Expertise', ar: 'خبرة رائدة', fr: 'Expertise Pionnière', ru: 'Новаторский Опыт' },
         image: 'https://images.unsplash.com/photo-1519415387722-a1c3bbef716c?auto=format&fit=crop&q=80&w=800',
         description: { 
-          en: 'Gravity Clinic stands at the forefront of natural hair restoration. Our highly qualified surgeons have performed thousands of successful transplant procedures, restoring confidence and maintaining the most natural-looking results through meticulous hairline design.',
-          ar: 'تقف عيادة جرافيتي في طليعة ترميم الشعر الطبيعي. أجرى جراحونا المؤهلون تأهيلا عاليا الآلاف من عمليات زراعة الشعر الناجحة، واستعادوا الثقة وحافظوا على النتائج الأكثر طبيعية من خلال تصميم دقيق لخط الشعر.',
+          en: 'Lumo Clinic stands at the forefront of natural hair restoration. Our highly qualified surgeons have performed thousands of successful transplant procedures, restoring confidence and maintaining the most natural-looking results through meticulous hairline design.',
+          ar: 'تقف عيادة Lumo في طليعة ترميم الشعر الطبيعي. أجرى جراحونا المؤهلون تأهيلا عاليا الآلاف من عمليات زراعة الشعر الناجحة، واستعادوا الثقة وحافظوا على النتائج الأكثر طبيعية من خلال تصميم دقيق لخط الشعر.',
         }
       },
       {

@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode, useMemo, useRef } from 'react';
 import { clinicService } from '../services/clinicService';
 import { api } from '../lib/api';
+import { DEMO_BRANDING, DEMO_HERO, overrideTreatments, overrideBlogs, overrideDoctors, overrideTestimonials, overrideLocations, overrideWhatsapp, overrideSocialLinks, overrideSections, overrideResults } from '../lib/demoContent';
+import { sanitizeText } from '../lib/demoUtils';
 
 export type LanguageCode = 'en' | 'fr' | 'ru' | 'ar';
 export type MultiLangText = Record<LanguageCode, string>;
@@ -268,6 +270,11 @@ const initialState: DashboardState = {
       ]
     },
     {
+      id: 'plastic-surgery',
+      label: { en: 'Plastic Surgery', ar: 'الجراحة التجميلية', fr: 'Chirurgie Plastique', ru: 'Пластическая хирургия' },
+      path: '/plastic-surgery'
+    },
+    {
       id: 'about',
       label: { en: 'About Us', ar: 'من نحن', fr: 'À Propos', ru: 'О Нас' },
       children: [
@@ -302,10 +309,10 @@ const initialState: DashboardState = {
     ruPhoneNumber: '+90 549 872 80 24',
     message: {
       ...initialMultiLang,
-      en: 'Hello Gravity Clinic, I would like to get more information.',
-      ar: 'مرحباً، أود الحصول على مزيد من المعلومات.',
-      fr: 'Bonjour, je souhaite obtenir plus d’informations.',
-      ru: 'Здравствуйте, я хотел(а) бы получить больше информации.'
+      en: 'Hello Lumo Clinic, I would like to get more information.',
+      ar: 'مرحبًا بعيادة Lumo، أود الحصول على مزيد من المعلومات.',
+      fr: 'Bonjour Lumo Clinic, je voudrais plus d’informations.',
+      ru: 'Здравствуйте Lumo Clinic, хотел бы получить информацию.'
     }
   },
   seo: { title: { ...initialMultiLang }, description: { ...initialMultiLang }, ogImage: '' },
@@ -318,7 +325,7 @@ const initialState: DashboardState = {
       id: 'instagram',
       platform: 'Instagram',
       icon_name: 'Instagram',
-      url: 'https://www.instagram.com/gravityclinicofficial/',
+      url: 'https://www.instagram.com/lumoclinic/',
       is_active: true
     },
     {
@@ -332,7 +339,7 @@ const initialState: DashboardState = {
       id: 'tiktok',
       platform: 'TikTok',
       icon_name: 'TikTok',
-      url: 'https://www.tiktok.com/@gravityclinic?_r=1&_t=ZS-95au6KjxlDu',
+      url: 'https://www.tiktok.com/@lumoclinic',
       is_active: true
     },
     {
@@ -349,7 +356,7 @@ const initialState: DashboardState = {
 };
 
 // Safely resolve multilingual fields to current language string
-export const getLangAttr = (attr: any, lang: LanguageCode): string => {
+const getLangAttr = (attr: any, lang: LanguageCode): string => {
   if (!attr) return '';
   if (typeof attr === 'string') return attr;
   if (typeof attr === 'object') {
@@ -429,95 +436,117 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
               ...(rawSettings?.whatsapp || {})
             },
             seo: rawSettings?.seo || prev.seo,
-            navLinks: (fullRes.navLinks || prev.navLinks).map((l: any) => {
-              // Extremely robust label cleaning
-              const sanitize = (labelVal: any, itemId?: string) => {
-                if (!labelVal) return labelVal;
-                
-                // If label is a string
-                if (typeof labelVal === 'string') {
-                  let cleaned = labelVal.replace(/[\u0600-\u06FF]/g, '').trim();
-                  if ((itemId === 'about' || labelVal.toLowerCase().includes('about')) && cleaned.startsWith('О На')) {
-                    return 'О Нас';
-                  }
-                  return cleaned;
-                }
-                
-                // If label is a multilingual object
-                if (typeof labelVal === 'object') {
-                  const cleanedObj = { ...labelVal };
-                  const enText = (cleanedObj.en || '').toLowerCase();
-                  if (cleanedObj.ru && typeof cleanedObj.ru === 'string') {
-                    const originalRU = cleanedObj.ru;
-                    cleanedObj.ru = originalRU.replace(/[\u0600-\u06FF]/g, '').trim();
-                    if ((itemId === 'about' || enText.includes('about')) && cleanedObj.ru.startsWith('О На')) {
-                      cleanedObj.ru = 'О Нас';
+            navLinks: (() => {
+              const mappedNavLinks = (fullRes.navLinks || prev.navLinks).map((l: any) => {
+                // Extremely robust label cleaning
+                const sanitize = (labelVal: any, itemId?: string) => {
+                  if (!labelVal) return labelVal;
+                  
+                  // If label is a string
+                  if (typeof labelVal === 'string') {
+                    let cleaned = labelVal.replace(/[\u0600-\u06FF]/g, '').trim();
+                    if ((itemId === 'about' || labelVal.toLowerCase().includes('about')) && cleaned.startsWith('О На')) {
+                      return 'О Нас';
                     }
+                    return cleaned;
                   }
-                  return cleanedObj;
-                }
-                return labelVal;
-              };
-              
-              const cleanedLabel = sanitize(l.label, l.id);
+                  
+                  // If label is a multilingual object
+                  if (typeof labelVal === 'object') {
+                    const cleanedObj = { ...labelVal };
+                    const enText = (cleanedObj.en || '').toLowerCase();
+                    if (cleanedObj.ru && typeof cleanedObj.ru === 'string') {
+                      const originalRU = cleanedObj.ru;
+                      cleanedObj.ru = originalRU.replace(/[\u0600-\u06FF]/g, '').trim();
+                      if ((itemId === 'about' || enText.includes('about')) && cleanedObj.ru.startsWith('О На')) {
+                        cleanedObj.ru = 'О Нас';
+                      }
+                    }
+                    return cleanedObj;
+                  }
+                  return labelVal;
+                };
+                
+                const cleanedLabel = sanitize(l.label, l.id);
 
-              // Support both 'children' and 'items' from backend
-              const rawChildren = l.children || l.items || [];
-              const children = rawChildren.map((child: any) => {
-                const cleanedChildLabel = sanitize(child.label, child.id);
+                // Support both 'children' and 'items' from backend
+                const rawChildren = l.children || l.items || [];
+                const children = rawChildren.map((child: any) => {
+                  const cleanedChildLabel = sanitize(child.label, child.id);
+                  
+                  let cleanedPath = child.path || child.url || child.link || child.slug || '/';
+                  const en = (typeof cleanedChildLabel === 'object' ? (cleanedChildLabel.en || '') : (typeof cleanedChildLabel === 'string' ? cleanedChildLabel : '')).toLowerCase();
+                  const ru = (typeof cleanedChildLabel === 'object' ? (cleanedChildLabel.ru || '') : '').toLowerCase();
+                  
+                  // Super robust path correction for Dental Implant
+                  if (en.includes('dental') && en.includes('implant') || 
+                      ru.includes('имплантац') || 
+                      (cleanedPath && cleanedPath.includes('dental-implant'))) {
+                    cleanedPath = '/treatment/dental-implant';
+                  }
+
+                  return {
+                    ...child,
+                    label: cleanedChildLabel,
+                    path: cleanedPath
+                  };
+                });
+
+                // Force 'Our Doctors' into About Us if missing
+                const isAbout = l.id === 'about' || 
+                               (typeof cleanedLabel === 'object' && cleanedLabel.en === 'About Us') ||
+                               (typeof cleanedLabel === 'string' && cleanedLabel.includes('About'));
                 
-                let cleanedPath = child.path || child.url || child.link || child.slug || '/';
-                const en = (typeof cleanedChildLabel === 'object' ? (cleanedChildLabel.en || '') : (typeof cleanedChildLabel === 'string' ? cleanedChildLabel : '')).toLowerCase();
-                const ru = (typeof cleanedChildLabel === 'object' ? (cleanedChildLabel.ru || '') : '').toLowerCase();
+                if (isAbout) {
+                  const hasDoctors = children.some((c: any) => c.path === '/doctors');
+                  if (!hasDoctors) {
+                    children.push({
+                      id: 'doctors-manual',
+                      label: { en: 'Our Doctors', ar: 'أطباؤنا', fr: 'Nos Docteurs', ru: 'Наши врачи' },
+                      path: '/doctors'
+                    });
+                  }
                 
-                // Super robust path correction for Dental Implant
-                if (en.includes('dental') && en.includes('implant') || 
-                    ru.includes('имплантац') || 
-                    (cleanedPath && cleanedPath.includes('dental-implant'))) {
-                  cleanedPath = '/treatment/dental-implant';
+                  // Sort children based on the requested order
+                  const getOrderIndex = (p: string = '') => {
+                    if (p.includes('/appointment')) return 0;
+                    if (p.includes('/blog') || p.includes('/articles')) return 1;
+                    if (p.includes('/doctors')) return 2;
+                    if (p.includes('/contact')) return 3;
+                    return 99;
+                  };
+
+                  children.sort((a: any, b: any) => getOrderIndex(a.path) - getOrderIndex(b.path));
                 }
 
                 return {
-                  ...child,
-                  label: cleanedChildLabel,
-                  path: cleanedPath
+                  ...l,
+                  label: cleanedLabel,
+                  children,
+                  items: children // Ensure both are present
                 };
               });
 
-              // Force 'Our Doctors' into About Us if missing
-              const isAbout = l.id === 'about' || 
-                             (typeof cleanedLabel === 'object' && cleanedLabel.en === 'About Us') ||
-                             (typeof cleanedLabel === 'string' && cleanedLabel.includes('About'));
-              
-              if (isAbout) {
-                const hasDoctors = children.some((c: any) => c.path === '/doctors');
-                if (!hasDoctors) {
-                  children.push({
-                    id: 'doctors-manual',
-                    label: { en: 'Our Doctors', ar: 'أطباؤنا', fr: 'Nos Docteurs', ru: 'Наши врачи' },
-                    path: '/doctors'
-                  });
-                }
-              
-                // Sort children based on the requested order
-                const getOrderIndex = (p: string = '') => {
-                  if (p.includes('/appointment')) return 0;
-                  if (p.includes('/blog') || p.includes('/articles')) return 1;
-                  if (p.includes('/doctors')) return 2;
-                  if (p.includes('/contact')) return 3;
-                  return 99;
+              // Inject Plastic Surgery safely
+              const hasPlasticSurgery = mappedNavLinks.some((l: any) => l.id === 'plastic-surgery' || l.path === '/plastic-surgery' || (typeof l.label === 'object' && l.label.en === 'Plastic Surgery'));
+              if (!hasPlasticSurgery) {
+                const aboutIndex = mappedNavLinks.findIndex((l: any) => l.id === 'about' || (typeof l.label === 'object' && l.label.en === 'About Us'));
+                const plasticSurgeryLink = {
+                  id: 'plastic-surgery',
+                  label: { en: 'Plastic Surgery', ar: 'الجراحة التجميلية', fr: 'Chirurgie Plastique', ru: 'Пластическая хирургия' },
+                  path: '/plastic-surgery',
+                  children: [],
+                  items: []
                 };
-
-                children.sort((a: any, b: any) => getOrderIndex(a.path) - getOrderIndex(b.path));
+                if (aboutIndex >= 0) {
+                  mappedNavLinks.splice(aboutIndex, 0, plasticSurgeryLink);
+                } else {
+                  mappedNavLinks.push(plasticSurgeryLink);
+                }
               }
 
-              return {
-                ...l,
-                label: cleanedLabel,
-                children,
-                items: children // Ensure both are present
-              };
-            }),
+              return mappedNavLinks;
+            })(),
             treatments: fullRes.treatments || prev.treatments,
             sections: rawSettings?.sections || prev.sections,
             whyChooseUsFeatures: rawSettings?.why_choose_us_features || prev.whyChooseUsFeatures,
@@ -532,6 +561,21 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
             processSteps: fullRes.processSteps || prev.processSteps,
             loading: false,
           };
+
+          const isDemo = import.meta.env.VITE_DEMO_MODE === 'true';
+          if (isDemo) {
+            newState.branding = { ...newState.branding, ...DEMO_BRANDING };
+            newState.hero = { ...newState.hero, ...DEMO_HERO };
+            newState.treatments = overrideTreatments(newState.treatments);
+            newState.blogs = overrideBlogs(newState.blogs);
+            newState.doctors = overrideDoctors(newState.doctors);
+            newState.testimonials = overrideTestimonials(newState.testimonials);
+            newState.results = overrideResults(newState.results);
+            newState.locations = overrideLocations(newState.locations);
+            newState.whatsapp = overrideWhatsapp(newState.whatsapp);
+            newState.socialLinks = overrideSocialLinks(newState.socialLinks);
+            newState.sections = overrideSections(newState.sections);
+          }
 
           saveToCache(newState);
           return newState;
@@ -548,7 +592,21 @@ export const DashboardProvider: React.FC<{ children: ReactNode }> = ({ children 
       const response = await api.get<any>(`/public/treatments/${slug}`);
       if (response) {
         setState((prev) => {
-          const newTreatments = prev.treatments.map((t) => (t.slug === slug ? { ...t, ...response } : t));
+          const newTreatments = prev.treatments.map((t) => {
+            if (t.slug === slug) {
+              let updated = { ...t, ...response };
+              const isDemo = import.meta.env.VITE_DEMO_MODE === 'true';
+              if (isDemo) {
+                // Find index to maintain consistency with override array
+                const idx = prev.treatments.findIndex(pt => pt.slug === slug);
+                const tempArray = overrideTreatments([{ ...updated }]);
+                updated = tempArray[0];
+                // Keep the original idx mapping if needed, but the simple override handles it well enough
+              }
+              return updated;
+            }
+            return t;
+          });
           const next = { ...prev, treatments: newTreatments };
           saveToCache(next);
           return next;

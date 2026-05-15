@@ -1,7 +1,7 @@
 import { useLanguage } from '../context/LanguageContext';
 import { Link } from 'react-router';
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react';
-import { Calendar, User, ArrowRight, Shield, Bell, ChevronRight } from 'lucide-react';
+import { Calendar, User, ArrowRight, Shield, Bell, ChevronRight, Clock, Sparkles, Search } from 'lucide-react';
 import { useState, useRef, useMemo } from 'react';
 import { useDashboard } from '../context/DashboardContext';
 import { clinicService } from '../services/clinicService';
@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { PremiumLoader } from '../components/ui/PremiumLoader';
 
 
-const artBg = 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=1200';
+const artBg = 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=1600';
 
 export function Articles() {
   const { language, t } = useLanguage();
@@ -20,8 +20,8 @@ export function Articles() {
     offset: ["start start", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const [selectedCategory, setSelectedCategory] = useState<'all' | string>('all');
@@ -52,20 +52,27 @@ export function Articles() {
     show: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
+        staggerChildren: 0.15
       }
     }
   };
 
   const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 }
+    hidden: { opacity: 0, y: 50 },
+    show: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        duration: 1.2,
+        ease: [0.22, 1, 0.36, 1]
+      }
+    }
   };
 
   return (
-    <div className="min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      {/* Premium Hero Section with Parallax */}
-      <section ref={heroRef} className="relative h-[45vh] flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen bg-[#F8FAFC]" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      {/* Luxury Cinematic Hero */}
+      <section ref={heroRef} className="relative h-[65vh] min-h-[550px] flex items-center justify-center overflow-hidden bg-[#0B1C2D]">
         <motion.div 
           className="absolute inset-0 w-full h-full"
           style={{ y: backgroundY }}
@@ -73,58 +80,77 @@ export function Articles() {
           <img
             src={state.sections['articles.hero']?.image || state.sections['articles.hero']?.media_url || artBg}
             alt={t('nav.articles')}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-40 grayscale-[0.2]"
           />
-          <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div>
+          {/* Layered Gradient Depth */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1C2D]/60 via-transparent to-[#F8FAFC]"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(8,145,178,0.1)_0%,transparent_70%)]"></div>
+          
+          {/* Subtle Grid Accent */}
+          <div className="absolute inset-0 bg-navbar-grid opacity-[0.05]"></div>
         </motion.div>
 
         <motion.div 
           style={{ y: textY, opacity }}
-          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pt-20"
+          className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-24"
         >
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-8 flex items-center justify-center gap-4"
+          >
+            <div className="w-8 h-[1px] bg-white/20"></div>
+            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#0891B2]">
+              {language === 'ar' ? 'منصة لومو كلينيك التحريرية' : 'The Clinical Editorial'}
+            </span>
+            <div className="w-8 h-[1px] bg-white/20"></div>
+          </motion.div>
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter mb-4"
+            transition={{ duration: 1, delay: 0.1 }}
+            className="text-6xl sm:text-8xl md:text-9xl font-serif text-white mb-8 tracking-tighter leading-[0.9] italic"
           >
-             {state.sections['articles.hero']?.title?.[language] || t('nav.articles')}
+             {state.sections['articles.hero']?.title?.[language] || 'Insights'}
           </motion.h1>
+
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-lg sm:text-xl md:text-2xl text-white/90 font-light max-w-3xl mx-auto px-4"
+            transition={{ duration: 1, delay: 0.2 }}
+            className="text-lg md:text-2xl text-white/60 font-body max-w-2xl mx-auto px-4 font-light leading-relaxed"
           >
-            {state.sections['articles.hero']?.subtitle?.[language] || t('articles.hero.subtitle')}
+            {state.sections['articles.hero']?.subtitle?.[language] || 'Explore the latest advancements in medical aesthetics and bespoke care.'}
           </motion.p>
         </motion.div>
       </section>
 
-      {/* Premium Category Filter */}
-      <section className="sticky top-20 z-40 py-6">
+      {/* Premium Segmented Filter */}
+      <section className="sticky top-[var(--navbar-height)] z-40 py-10 -mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center">
-            <div className="bg-white/80 backdrop-blur-2xl p-2 rounded-[2rem] border border-border/40 shadow-xl flex flex-wrap justify-center gap-2 rtl:flex-row-reverse">
+            <div className="bg-white/80 backdrop-blur-2xl p-2 rounded-[2rem] border border-[#0B1C2D]/[0.05] shadow-[0_20px_50px_-15px_rgba(11,28,45,0.08)] flex flex-wrap justify-center gap-1.5">
               {categories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  type="button"
-                  aria-pressed={selectedCategory === category}
-                  className={`px-6 sm:px-8 py-2 sm:py-3 rounded-2xl transition-all font-bold text-[10px] sm:text-xs tracking-widest uppercase cursor-pointer ${
-                    selectedCategory === category
-                      ? 'bg-primary text-white shadow-2xl shadow-primary/40'
-                      : 'text-muted-foreground hover:text-secondary hover:bg-muted/50'
+                  className={`px-8 py-3.5 rounded-2xl transition-all duration-700 font-bold text-[10px] tracking-[0.3em] uppercase relative group overflow-hidden ${
+                    selectedCategory === category ? 'text-white' : 'text-[#0B1C2D]/40 hover:text-[#0B1C2D]'
                   }`}
                 >
-                  {category === 'all' 
-                    ? t('articles.filter.all') 
-                    : category === 'dental' 
-                    ? t('articles.filter.dental') 
-                    : category === 'hair'
-                    ? t('articles.filter.hair')
-                    : category}
+                  {selectedCategory === category && (
+                    <motion.div
+                      layoutId="activeFilter"
+                      className="absolute inset-0 bg-[#0B1C2D] shadow-xl"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">
+                    {category === 'all' 
+                      ? t('articles.filter.all') 
+                      : category}
+                  </span>
                 </button>
               ))}
             </div>
@@ -132,97 +158,106 @@ export function Articles() {
         </div>
       </section>
 
-      {/* Articles Grid */}
-      <section className="py-24">
+      {/* Editorial Grid Section */}
+      <section className="py-40 relative">
+        <div className="absolute inset-0 bg-navbar-grid opacity-[0.02] pointer-events-none" />
+        
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {state.blogs.length === 0 ? (
-            <div className="flex flex-col items-center justify-center py-32 text-muted-foreground">
+            <div className="flex flex-col items-center justify-center py-32">
               {state.loading ? (
                 <PremiumLoader fullScreen={false} />
               ) : (
-                <p className="text-sm font-semibold uppercase tracking-widest">{t('articles.empty') || 'No articles yet — check back soon.'}</p>
+                <p className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0B1C2D]/30">{t('articles.empty') || 'No articles found.'}</p>
               )}
             </div>
           ) : (
           <motion.div
             variants={container}
             initial="hidden"
-            animate="show"
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10"
+            whileInView="show"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-16"
           >
             <AnimatePresence mode="popLayout">
-              {filteredArticles.map((article) => (
-                <Link
-                  to={`/blog/${article.slug}`}
+              {filteredArticles.map((article, idx) => (
+                <motion.div
                   key={article.id}
-                  className="group block"
+                  layout
+                  variants={item}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  className="group flex flex-col h-full"
                 >
-                  <motion.article
-                    layout
-                    variants={item}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    className="h-full bg-white rounded-[2.5rem] border border-border/40 overflow-hidden hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.1)] transition-all duration-700 hover:-translate-y-2 flex flex-col"
-                  >
-                    <div className="aspect-[16/11] overflow-hidden relative">
-                      <img
-                        src={article.media_url || (typeof article.image === 'string' ? article.image : '') || artBg}
-                        alt={(article.title as any)?.[language] || (article.title as any)?.en || ''}
-                        loading="lazy"
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = artBg;
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                      <div className="absolute top-6 right-6 rtl:right-auto rtl:left-6">
-                        <div className="px-4 py-1 bg-white/90 backdrop-blur-md text-secondary rounded-full text-[10px] font-black uppercase tracking-[0.2em]">
-                          {(article.read_time as any)?.[language] || (article.read_time as any)?.en || '5 min'}
-                        </div>
+                  <Link to={`/blog/${article.slug}`} className="relative aspect-[16/11] overflow-hidden block rounded-[3rem] bg-[#0B1C2D]/5 shadow-[0_30px_60px_-15px_rgba(11,28,45,0.12)] transition-transform duration-700 group-hover:-translate-y-4">
+                    <img
+                      src={article.media_url || (typeof article.image === 'string' ? article.image : '') || artBg}
+                      alt={(article.title as any)?.[language] || (article.title as any)?.en || ''}
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
+                      onError={(e) => { (e.target as HTMLImageElement).src = artBg; }}
+                    />
+                    
+                    {/* Editorial Badges */}
+                    <div className="absolute top-8 left-8 z-20">
+                      <span className="px-6 py-2.5 bg-white/95 backdrop-blur-xl text-[#0B1C2D] text-[9px] font-bold uppercase tracking-[0.2em] rounded-full border border-white/30 shadow-xl flex items-center gap-2">
+                        <Sparkles className="w-3 h-3 text-[#0891B2]" />
+                        {(article.category as any)?.[language] || (article.category as any)?.en || 'General'}
+                      </span>
+                    </div>
+
+                    <div className="absolute bottom-8 right-8 z-20 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                      <div className="w-14 h-14 bg-[#0891B2] text-white rounded-[1.25rem] flex items-center justify-center shadow-2xl shadow-[#0891B2]/40">
+                        <ArrowRight className={`w-6 h-6 ${language === 'ar' ? 'rotate-180' : ''}`} />
                       </div>
                     </div>
 
-                    <div className="p-6 sm:p-8 lg:p-10 rtl:text-right flex flex-col flex-1">
-                      <div className="flex items-center justify-between mb-6 rtl:flex-row-reverse">
-                        {article.treatment?.slug ? (
-                          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">
-                            {(article.treatment.title as any)?.[language] || (article.treatment.title as any)?.en}
-                          </span>
-                        ) : (
-                          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">
-                            {(article.category as any)?.[language] || (article.category as any)?.en || 'General'}
-                          </span>
-                        )}
-                      </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B1C2D]/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                  </Link>
 
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold text-secondary mb-4 leading-tight group-hover:text-primary transition-colors line-clamp-2 italic">
+                  <div className="pt-12 flex-1 flex flex-col px-4">
+                    <div className="flex items-center gap-6 mb-8">
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-[#0B1C2D]/30 uppercase tracking-[0.3em]">
+                        <Calendar className="w-3.5 h-3.5 text-[#0891B2]/50" />
+                        {article.created_at ? new Date(article.created_at).toLocaleDateString(language === 'ar' ? 'ar-EG' : 'en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : ''}
+                      </div>
+                      <div className="w-1 h-1 rounded-full bg-[#0B1C2D]/10"></div>
+                      <div className="flex items-center gap-2 text-[10px] font-bold text-[#0B1C2D]/30 uppercase tracking-[0.3em]">
+                        <Clock className="w-3.5 h-3.5 text-[#0891B2]/50" />
+                        {(article.read_time as any)?.[language] || (article.read_time as any)?.en || '5 min'}
+                      </div>
+                    </div>
+
+                    <h3 className="text-3xl md:text-[2.25rem] font-serif italic text-[#0B1C2D] mb-6 leading-[1.1] tracking-tight group-hover:text-[#0891B2] transition-colors duration-500">
+                      <Link to={`/blog/${article.slug}`}>
                         {(article.title as any)?.[language] || (article.title as any)?.en || ''}
-                      </h3>
+                      </Link>
+                    </h3>
 
-                      <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-6 sm:mb-8 line-clamp-3 flex-1 italic">
-                        {(article.excerpt as any)?.[language] || (article.excerpt as any)?.en || ''}
-                      </p>
+                    <p className="text-base text-[#0B1C2D]/50 font-body font-light leading-relaxed mb-10 line-clamp-3">
+                      {(article.excerpt as any)?.[language] || (article.excerpt as any)?.en || ''}
+                    </p>
 
-                      <div className="pt-6 sm:pt-8 border-t border-muted flex items-center justify-between rtl:flex-row-reverse">
-                        <div className="flex items-center gap-3 rtl:flex-row-reverse">
-                          <div className="w-10 h-10 rounded-full bg-muted border-2 border-primary/20 flex items-center justify-center overflow-hidden">
-                             <User className="w-5 h-5 text-primary" />
-                          </div>
-                          <div className="rtl:text-right">
-                            <p className="text-xs font-bold text-secondary">{(article.author as any)?.[language] || (article.author as any)?.en || 'Gravity Clinic'}</p>
-                            <p className="text-[10px] text-muted-foreground uppercase tracking-widest">
-                              {article.created_at ? new Date(article.created_at).toLocaleDateString() : ''}
-                            </p>
-                          </div>
+                    <div className="mt-auto pt-10 border-t border-[#0B1C2D]/[0.05] flex items-center justify-between">
+                      <div className="flex items-center gap-4">
+                        <div className="w-11 h-11 rounded-2xl bg-[#0B1C2D]/[0.02] border border-[#0B1C2D]/[0.06] flex items-center justify-center">
+                           <User className="w-5 h-5 text-[#0B1C2D]/20" />
                         </div>
-                        <div
-                          className="w-12 h-12 rounded-2xl bg-muted group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center"
-                        >
-                          <ArrowRight className={`w-5 h-5 group-hover:translate-x-1 rtl:group-hover:-translate-x-1 transition-transform ${language === 'ar' ? 'rotate-180' : ''}`} />
+                        <div className="flex flex-col">
+                          <span className="text-[9px] font-bold text-[#0B1C2D]/30 uppercase tracking-widest mb-0.5">Author</span>
+                          <span className="text-xs font-bold text-[#0B1C2D]/80">{(article.author as any)?.[language] || (article.author as any)?.en || 'Lumo Clinic'}</span>
                         </div>
                       </div>
+                      
+                      <Link 
+                        to={`/blog/${article.slug}`} 
+                        className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0891B2] flex items-center gap-2 hover:gap-4 transition-all duration-500"
+                      >
+                        {language === 'ar' ? 'اقرأ المزيد' : 'Read Insight'}
+                        <ArrowRight className={`w-3.5 h-3.5 ${language === 'ar' ? 'rotate-180' : ''}`} />
+                      </Link>
                     </div>
-                  </motion.article>
-                </Link>
+                  </div>
+                </motion.div>
               ))}
             </AnimatePresence>
           </motion.div>
@@ -230,96 +265,68 @@ export function Articles() {
         </div>
       </section>
 
-      {/* Premium Newsletter Section */}
-      <section className="py-24 relative overflow-hidden text-white">
-        <div className="absolute inset-0 bg-primary/5 -z-10" />
+      {/* Luxury Newsletter Engagement */}
+      <section className="py-40 relative overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-secondary p-12 md:p-20 rounded-[4rem] relative overflow-hidden shadow-2xl">
-            <div className="absolute top-0 right-0 w-1/2 h-full bg-primary/10 blur-[150px] -translate-y-1/2 translate-x-1/2" />
+          <div className="bg-[#0B1C2D] p-16 md:p-32 rounded-[4rem] relative overflow-hidden shadow-[0_50px_100px_-20px_rgba(11,28,45,0.4)]">
+            {/* Ambient Background Depth */}
+            <div className="absolute top-0 right-0 w-[60%] h-full bg-[#0891B2]/10 blur-[150px] -translate-y-1/2 translate-x-1/2" />
+            <div className="absolute bottom-0 left-0 w-[40%] h-[60%] bg-[#0891B2]/5 blur-[120px] translate-y-1/2 -translate-x-1/2" />
+            <div className="absolute inset-0 bg-navbar-grid opacity-[0.05]" />
             
             <div className="relative z-10 max-w-3xl mx-auto text-center">
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="inline-flex items-center px-4 py-2 bg-white/5 rounded-full mb-8 rtl:flex-row-reverse"
+                className="inline-flex items-center px-6 py-2.5 bg-white/5 rounded-full mb-12 border border-white/10"
               >
-                <Bell className="w-4 h-4 text-primary mr-2 rtl:mr-0 rtl:ml-2" />
-                <span className="text-xs font-bold uppercase tracking-widest text-primary">{t('articles.newsletter.badge')}</span>
+                <Bell className="w-4 h-4 text-[#0891B2] mr-3 rtl:mr-0 rtl:ml-3" />
+                <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#0891B2]">Stay Informed</span>
               </motion.div>
               
-              <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight italic">
-                {t('articles.newsletter.title')}
+              <h2 className="text-4xl md:text-8xl font-serif text-white mb-10 leading-[0.95] italic">
+                {t('articles.newsletter.title') || 'The Editorial Feed'}
               </h2>
-              <p className="text-xl text-white/60 mb-12 max-w-2xl mx-auto">
-                {t('articles.newsletter.subtitle')}
+              <p className="text-lg md:text-2xl text-white/50 mb-16 max-w-2xl mx-auto font-body font-light leading-relaxed">
+                {t('articles.newsletter.subtitle') || 'Subscribe to our medical insights for the latest in aesthetics and clinic excellence.'}
               </p>
 
               <form 
                 onSubmit={async (e) => {
                   e.preventDefault();
-                  setNewsletterError('');
-                  
-                  if (!newsletterEmail) {
-                    setNewsletterError(t('auth.error.required'));
-                    return;
-                  }
-
-                  // Robust email validation
-                  if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(newsletterEmail)) {
-                    setNewsletterError(t('auth.error.email'));
-                    return;
-                  }
-
+                  if (!newsletterEmail || isSubscribing) return;
                   setIsSubscribing(true);
                   try {
-                    await clinicService.submitLead({
-                      type: 'newsletter',
-                      email: newsletterEmail
-                    }, language);
+                    await clinicService.submitLead({ type: 'newsletter', email: newsletterEmail }, language);
                     toast.success(t('contact.success.msg'));
                     setNewsletterEmail('');
-                    setNewsletterError('');
-                  } catch (error: any) {
-                    if (error.status === 422 && error.errors?.email) {
-                      setNewsletterError(t('auth.error.email'));
-                    } else {
-                      toast.error(t('common.error.generic'));
-                    }
+                  } catch (error) {
+                    toast.error(t('common.error.generic'));
                   } finally {
                     setIsSubscribing(false);
                   }
                 }}
-                className="flex flex-col sm:flex-row gap-4 p-2 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-md rtl:flex-row-reverse"
+                className="flex flex-col sm:flex-row gap-5 p-3 bg-white/5 rounded-[3rem] border border-white/10 backdrop-blur-xl"
               >
-                <label className="sr-only" htmlFor="articles_newsletter_email">
-                  Email
-                </label>
                 <input
                   type="email"
-                  id="articles_newsletter_email"
-                  autoComplete="email"
-                  required
-                  placeholder="name@exclusive.com"
+                  placeholder={language === 'ar' ? 'البريد الإلكتروني' : 'Enter your email address'}
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className={`bg-transparent text-white px-8 py-4 outline-none flex-1 font-medium placeholder:text-white/20 rtl:text-right ${newsletterError ? 'border-b-2 border-red-500' : ''}`}
+                  className="bg-transparent text-white px-10 py-6 outline-none flex-1 font-body text-lg placeholder:text-white/20 rtl:text-right"
                 />
-                {newsletterError && (
-                  <div className="absolute top-full left-0 right-0 mt-2 text-center">
-                    <p className="text-red-500 text-[10px] font-bold uppercase tracking-widest">{newsletterError}</p>
-                  </div>
-                )}
-                  <button 
-                    type="submit" 
-                    disabled={isSubscribing}
-                    className="px-12 py-4 bg-primary text-white font-black uppercase tracking-widest text-xs rounded-2xl hover:scale-105 transition-all shadow-xl shadow-primary/20 cursor-pointer disabled:opacity-50"
-                  >
-                     {isSubscribing ? t('common.loading') : t('articles.newsletter.cta')}
-                  </button>
+                <button 
+                  type="submit" 
+                  disabled={isSubscribing}
+                  className="btn-luxury !px-16 !py-6 !text-base disabled:opacity-50"
+                >
+                    {isSubscribing ? 'Subscribing...' : t('articles.newsletter.cta')}
+                </button>
               </form>
-              <p className="mt-6 text-white/30 text-[10px] uppercase font-bold tracking-[0.2em]">
-                {t('articles.newsletter.footer')}
+              
+              <p className="mt-12 text-white/20 text-[10px] uppercase font-bold tracking-[0.5em]">
+                {t('articles.newsletter.footer') || 'Privacy Assured • Bespoke Communication'}
               </p>
             </div>
           </div>

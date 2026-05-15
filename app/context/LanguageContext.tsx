@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode, useEffect, useCallback } from 'react';
 import { translations, Language, TranslationKey } from '../locales';
+import { sanitizeText } from '../lib/demoUtils';
 
 interface LanguageContextType {
   language: Language;
@@ -70,7 +71,7 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
       });
     }
 
-    return text;
+    return sanitizeText(text);
   }, [language]);
 
   return (

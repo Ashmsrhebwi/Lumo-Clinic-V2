@@ -2,21 +2,29 @@
 :root {
   --font-size: 16px;
   /* Light Mode - Crisp, clean, and luxurious */
+  /* Global Branding Tokens - Restored to original for Admin consistency */
   --background: #F7F8FA;
   --foreground: #1E1C4B;
   --card: #FFFFFF;
   --card-foreground: #1E1C4B;
   --popover: #FFFFFF;
   --popover-foreground: #1E1C4B;
+  
+  /* Primary is original Orange */
   --primary: #F28522;
   --primary-foreground: #ffffff;
-  /* Secondary is now the brand navy — used for headings, strong text, active states */
+  
+  /* Secondary is original Purple */
   --secondary: #1E1C4B;
   --secondary-foreground: #FFFFFF;
+  
   --muted: #EEF0F5;
   --muted-foreground: #52607A;
+  
+  /* Accent is Orange */
   --accent: #F28522;
   --accent-foreground: #ffffff;
+  
   --destructive: #ef4444;
   --destructive-foreground: #ffffff;
   --border: #D8DCE8;
@@ -26,11 +34,13 @@
   --font-weight-medium: 500;
   --font-weight-normal: 400;
   --ring: #F28522;
+  
   --chart-1: #F28522;
   --chart-2: #1E1C4B;
   --chart-3: #fcd34d;
   --chart-4: #4ade80;
   --chart-5: #60a5fa;
+  
   --radius: 0.625rem;
   --sidebar: #ffffff;
   --sidebar-foreground: #1E1C4B;
@@ -40,6 +50,23 @@
   --sidebar-accent-foreground: #1E1C4B;
   --sidebar-border: #D8DCE8;
   --sidebar-ring: #F28522;
+
+  /* Navbar Specific - Isolated to match Demo Luxury Style */
+  --navbar-bg: #FFFFFF;
+  --navbar-navy: #0B1C2D;
+  --navbar-cyan: #0891B2;
+  --navbar-height: 72px;
+  --navbar-height-mobile: 64px;
+  --navbar-font-size: 10.5px;
+  --navbar-letter-spacing: 0.14em;
+  --navbar-cta-shadow: 0 6px 18px -4px rgba(11, 23, 45, 0.18);
+  --navbar-border: rgba(11, 28, 45, 0.02);
+
+  /* Hero Specific - Isolated to match Demo Luxury Style */
+  --hero-title-size: clamp(38px, 6vw, 84px);
+  --hero-font-display: 'Cormorant Garamond', serif;
+  --hero-font-body: 'DM Sans', sans-serif;
+  --hero-image-radius: 32px;
 }
 
 
@@ -153,5 +180,120 @@
     font-size: var(--text-base);
     font-weight: var(--font-weight-normal);
     line-height: 1.5;
+  }
+}
+
+@layer utilities {
+  .bg-navbar-grid {
+    background-size: 100px 100px;
+    background-image: 
+      linear-gradient(to right, var(--navbar-border) 1px, transparent 1px),
+      linear-gradient(to top, var(--navbar-border) 1px, transparent 1px);
+  }
+
+  .hero-grid-lines {
+    background-image: linear-gradient(rgba(11, 23, 45, 0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 23, 45, 0.03) 1px, transparent 1px);
+    background-size: 100px 100px;
+  }
+
+  .font-display {
+    font-family: var(--hero-font-display);
+  }
+
+  .font-body {
+    font-family: var(--hero-font-body);
+  }
+
+  /* Finer grid for deeper luxury sections */
+  .hero-grid-lines-fine {
+    background-image: linear-gradient(rgba(11, 23, 45, 0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(11, 23, 45, 0.018) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Luxury section-to-section divider */
+  .section-divider-luxury {
+    height: 1px;
+    background: linear-gradient(to right, transparent 0%, rgba(8, 145, 178, 0.12) 35%, rgba(8, 145, 178, 0.12) 65%, transparent 100%);
+  }
+
+  /* Ambient depth glow — place as absolute inset background element */
+  .ambient-depth {
+    background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(8, 145, 178, 0.04) 0%, transparent 70%);
+  }
+
+  /* Premium eyebrow label */
+  .label-eyebrow {
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--navbar-cyan);
+    opacity: 0.75;
+  }
+
+  /* Unified Luxury Card */
+  .card-luxury {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(24px);
+    border-radius: 2.5rem;
+    border: 1px solid rgba(11, 28, 45, 0.04);
+    box-shadow: 0 20px 60px -15px rgba(11, 28, 45, 0.05);
+    transition: all 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .card-luxury:hover {
+    background: #ffffff;
+    box-shadow: 0 40px 90px -20px rgba(8, 145, 178, 0.12);
+    border-color: rgba(8, 145, 178, 0.15);
+    transform: translateY(-4px);
+  }
+
+  /* Unified Luxury Button */
+  .btn-luxury {
+    padding: 1rem 2rem;
+    background: var(--navbar-navy);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border-radius: 9999px;
+    box-shadow: 0 12px 24px -6px rgba(11, 28, 45, 0.2);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .btn-luxury:hover {
+    background: var(--navbar-cyan);
+    box-shadow: 0 12px 32px -8px rgba(8, 145, 178, 0.3);
+    transform: translateY(-2px);
+  }
+
+  .btn-luxury-outline {
+    padding: 1rem 2rem;
+    background: transparent;
+    border: 1px solid var(--navbar-border);
+    color: var(--navbar-navy);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    border-radius: 9999px;
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .btn-luxury-outline:hover {
+    background: var(--navbar-navy);
+    color: #ffffff;
+    border-color: var(--navbar-navy);
   }
 }

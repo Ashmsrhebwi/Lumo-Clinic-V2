@@ -5,7 +5,7 @@ import { useLanguage, Language } from './context/LanguageContext';
 import { Mail, Phone, Facebook, Instagram, Twitter, Youtube, MessageCircle, ChevronUp, MapPin, Clock, ShieldCheck } from 'lucide-react';
 import { Link } from 'react-router';
 import { useEffect, useState } from 'react';
-import { m, useScroll, useSpring, AnimatePresence, LazyMotion, domAnimation } from 'motion/react';
+import { AnimatePresence, LazyMotion, domAnimation, motion as m, useScroll } from 'motion/react';
 import { useDashboard } from './context/DashboardContext';
 import { WhatsAppWidget } from './components/ui/WhatsAppWidget';
 import { ScrollToTop } from './components/ScrollToTop';
@@ -59,12 +59,7 @@ export function Root() {
     }
   }, [state?.settings, state?.seo, language]);
 
-  const { scrollYProgress, scrollY } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
+  const { scrollY } = useScroll();
 
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -82,11 +77,6 @@ export function Root() {
     <LazyMotion features={domAnimation}>
       <ScrollToTop />
       <div className="min-h-screen flex flex-col bg-background text-foreground" style={{ fontFamily: state?.settings?.fontFamily || 'Inter, system-ui, sans-serif' }}>
-        <m.div
-          className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-[100]"
-          style={{ scaleX, backgroundColor: state?.settings?.primaryColor || '#F28522' }}
-          aria-hidden="true"
-        />
         {!isAuthPage && <Navigation />}
 
         <main className="flex-1">

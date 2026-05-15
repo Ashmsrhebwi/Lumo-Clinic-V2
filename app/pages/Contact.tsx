@@ -1,13 +1,14 @@
 import { useLanguage } from '../context/LanguageContext';
 import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
-import { Mail, Phone, MapPin, Clock, Send, Shield, ChevronDown, Check } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, Send, Shield, ChevronDown, Check, Sparkles } from 'lucide-react';
 import { useState, useRef } from 'react';
 import { toast } from 'sonner';
 import { useDashboard } from '../context/DashboardContext';
 import { clinicService } from '../services/clinicService';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
-const contactBg = 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=1200';
+import { sanitizeText } from '../lib/demoUtils';
+const contactBg = 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&q=80&w=1600';
 
 export function Contact() {
   const { language, t } = useLanguage();
@@ -18,8 +19,8 @@ export function Contact() {
     offset: ["start start", "end start"]
   });
 
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+  const textY = useTransform(scrollYProgress, [0, 1], ["0%", "80%"]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   const [formData, setFormData] = useState({
@@ -94,9 +95,9 @@ export function Contact() {
   };
 
   return (
-    <div className="min-h-screen" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      {/* Premium Hero Section with Parallax */}
-      <section ref={heroRef} className="relative h-[40vh] flex items-center justify-center overflow-hidden">
+    <div className="min-h-screen bg-[#F8FAFC]" dir={language === 'ar' ? 'rtl' : 'ltr'}>
+      {/* Cinematic Premium Hero */}
+      <section ref={heroRef} className="relative h-[75vh] min-h-[650px] flex items-center justify-center overflow-hidden bg-[#0B1C2D]">
         <motion.div 
           className="absolute inset-0 w-full h-full"
           style={{ y: backgroundY }}
@@ -104,48 +105,69 @@ export function Contact() {
           <img
             src={state.sections['contact.hero']?.media_url || state.sections['contact.hero']?.image || state.sections['about.contact']?.media_url || state.sections['about.contact']?.image || contactBg}
             alt={t('contact.title')}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover opacity-60 grayscale-[0.2] scale-105"
           />
-          <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply"></div>
+          {/* Deep Cinematic Gradients */}
+          <div className="absolute inset-0 bg-[#0B1C2D]/50 mix-blend-multiply"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#F8FAFC] via-[#0B1C2D]/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(8,145,178,0.15)_0%,transparent_60%)]"></div>
+          
+          {/* Subtle Luxury Grid Overlay */}
+          <div className="absolute inset-0 bg-navbar-grid opacity-[0.05]"></div>
         </motion.div>
 
         <motion.div 
           style={{ y: textY, opacity }}
-          className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white pt-24"
+          className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20"
         >
-          <motion.h1
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-4"
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col items-center"
           >
-            {state.sections['contact.hero']?.title?.[language] || state.sections['about.contact']?.title?.[language] || t('contact.title')}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-base sm:text-xl md:text-2xl text-white/90 font-light px-4"
-          >
-            {state.sections['contact.hero']?.subtitle?.[language] || state.sections['about.contact']?.subtitle?.[language] || t('contact.subtitle')}
-          </motion.p>
+            <span className="px-6 py-2 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-[0.4em] text-white/80 mb-8 flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5 text-[#0891B2]" />
+              {language === 'ar' ? 'تواصل معنا' : 'CONCIERGE DESK'}
+            </span>
+
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif italic text-white mb-10 tracking-tighter leading-[0.9]">
+              {language === 'ar' ? 'تواصل مع خبرائنا' : 'Connect'}
+            </h1>
+
+            <div className="w-px h-16 bg-gradient-to-b from-[#0891B2]/50 to-transparent mx-auto mb-10"></div>
+
+            <p className="text-xl md:text-2xl text-white/70 font-body max-w-2xl mx-auto font-light leading-relaxed">
+              {state.sections['contact.hero']?.subtitle?.[language] || state.sections['about.contact']?.subtitle?.[language] || t('contact.subtitle')}
+            </p>
+          </motion.div>
         </motion.div>
       </section>
 
-      {/* Contact Form and Info Section */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Form */}
+      {/* Boutique Contact Form and Info Section */}
+      <section className="py-32 md:py-40 relative overflow-hidden -mt-20 z-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+            
+            {/* Form Section */}
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-card text-card-foreground border border-border rounded-2xl shadow-xl p-8 rtl:text-right"
+              transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-7 bg-white rounded-[4rem] shadow-[0_60px_120px_-30px_rgba(11,28,45,0.08)] border border-[#0B1C2D]/[0.03] p-10 md:p-16 lg:p-20 rtl:text-right"
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-secondary italic">{t('contact.form.title')}</h2>
+              <div className="mb-14 border-l-[3px] border-[#0891B2]/40 pl-8 rtl:border-l-0 rtl:border-r-[3px] rtl:pl-0 rtl:pr-8">
+                <span className="text-[10px] font-bold text-[#0B1C2D]/40 uppercase tracking-[0.4em] block mb-4">
+                  PRIVATE INQUIRY
+                </span>
+                <h2 className="text-4xl md:text-5xl font-serif text-[#0B1C2D] italic leading-tight">
+                  {t('contact.form.title') || 'Send us a message'}
+                </h2>
+              </div>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
-                {/* Honeypot Field - completely hidden from layout */}
+              <form onSubmit={handleSubmit} className="space-y-10">
+                {/* Honeypot Field */}
                 <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
                   <label htmlFor="bot_field_contact">{t('contact.bot_label')}</label>
                   <input 
@@ -159,196 +181,203 @@ export function Contact() {
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t('contact.name')} *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => handleInputChange('name', e.target.value)}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500/50' : 'border-border'} bg-card text-foreground focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors`}
-                    required
-                  />
-                  {errors.name && <p className="text-[10px] text-red-500 font-bold mt-1 px-1">{errors.name}</p>}
-                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                  <div className="relative group/input">
+                    <input
+                      type="text"
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => handleInputChange('name', e.target.value)}
+                      className="peer w-full bg-transparent border-b border-[#0B1C2D]/10 py-4 text-xl text-[#0B1C2D] focus:border-[#0891B2] outline-none transition-all placeholder-transparent font-light"
+                      placeholder={t('contact.name')}
+                      required
+                    />
+                    <label htmlFor="name" className="absolute left-0 -top-3.5 text-[10px] font-bold text-[#0B1C2D]/40 uppercase tracking-[0.3em] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-[#0B1C2D]/30 peer-placeholder-shown:top-4 peer-placeholder-shown:font-light peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-[#0891B2] rtl:right-0 rtl:left-auto">
+                      {t('contact.name')} *
+                    </label>
+                    {errors.name && <p className="text-[10px] text-red-500 font-bold mt-2">{errors.name}</p>}
+                  </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t('booking.email')} *
-                  </label>
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500/50' : 'border-border'} bg-card text-foreground focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors`}
-                    required
-                  />
-                  {errors.email && <p className="text-[10px] text-red-500 font-bold mt-1 px-1">{errors.email}</p>}
+                  <div className="relative group/input">
+                    <input
+                      type="email"
+                      id="email"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className="peer w-full bg-transparent border-b border-[#0B1C2D]/10 py-4 text-xl text-[#0B1C2D] focus:border-[#0891B2] outline-none transition-all placeholder-transparent font-light"
+                      placeholder={t('booking.email')}
+                      required
+                    />
+                    <label htmlFor="email" className="absolute left-0 -top-3.5 text-[10px] font-bold text-[#0B1C2D]/40 uppercase tracking-[0.3em] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-[#0B1C2D]/30 peer-placeholder-shown:top-4 peer-placeholder-shown:font-light peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-[#0891B2] rtl:right-0 rtl:left-auto">
+                      {t('booking.email')} *
+                    </label>
+                    {errors.email && <p className="text-[10px] text-red-500 font-bold mt-2">{errors.email}</p>}
+                  </div>
                 </div>
                 
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t('booking.phone')} *
-                  </label>
-                  <PhoneInput
-                    country={'tr'}
-                    value={formData.phone}
-                    onChange={(phone) => handleInputChange('phone', '+' + phone)}
-                    inputProps={{
-                      name: 'phone',
-                      required: true,
-                      autoComplete: 'tel',
-                      id: 'contact_phone'
-                    }}
-                    containerClass="!w-full"
-                    inputClass={`!w-full !px-14 !py-3 !rounded-lg !border ${errors.phone ? '!border-red-500/50' : '!border-border'} !bg-card !text-foreground focus:!ring-2 focus:!ring-primary focus:!border-primary !outline-none !transition-colors !h-auto !font-inherit`}
-                    buttonClass={`!border-none !bg-transparent !rounded-l-lg !px-3 hover:!bg-muted/20 ${language === 'ar' ? '!right-0 !left-auto !border-l' : '!left-0 !border-r'} !border-border`}
-                    dropdownClass="!rounded-xl !border-border !shadow-2xl !bg-white !text-secondary"
-                    searchClass="!bg-muted/10 !border-border"
-                  />
-                  {errors.phone && <p className="text-[10px] text-red-500 font-bold mt-1 px-1">{errors.phone}</p>}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-10 pt-4">
+                  <div className="relative z-10">
+                    <label className="text-[10px] font-bold text-[#0B1C2D]/40 uppercase tracking-[0.3em] block mb-2 rtl:text-right">
+                      {t('booking.phone')} *
+                    </label>
+                    <PhoneInput
+                      country={'tr'}
+                      value={formData.phone}
+                      onChange={(phone) => handleInputChange('phone', '+' + phone)}
+                      inputProps={{ name: 'phone', required: true, autoComplete: 'tel', id: 'contact_phone' }}
+                      containerClass="!w-full"
+                      inputClass={`!w-full !px-16 !py-4 !rounded-none !border-0 !border-b !bg-transparent !text-[#0B1C2D] !text-xl !font-light focus:!ring-0 focus:!border-[#0891B2] !outline-none !transition-all !h-auto ${errors.phone ? '!border-red-500' : '!border-[#0B1C2D]/10'}`}
+                      buttonClass={`!border-none !bg-transparent !px-0 hover:!bg-transparent ${language === 'ar' ? '!right-0 !left-auto' : '!left-0'}`}
+                      dropdownClass="!rounded-2xl !border-[#0B1C2D]/5 !shadow-2xl !bg-white !text-[#0B1C2D]"
+                    />
+                    {errors.phone && <p className="text-[10px] text-red-500 font-bold mt-2">{errors.phone}</p>}
+                  </div>
+
+                  <div className="relative group/input pt-[22px]">
+                    <input
+                      type="text"
+                      id="subject"
+                      value={formData.subject}
+                      onChange={(e) => handleInputChange('subject', e.target.value)}
+                      className="peer w-full bg-transparent border-b border-[#0B1C2D]/10 py-4 text-xl text-[#0B1C2D] focus:border-[#0891B2] outline-none transition-all placeholder-transparent font-light"
+                      placeholder={t('contact.subject')}
+                      required
+                    />
+                    <label htmlFor="subject" className="absolute left-0 -top-3.5 text-[10px] font-bold text-[#0B1C2D]/40 uppercase tracking-[0.3em] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-[#0B1C2D]/30 peer-placeholder-shown:top-4 peer-placeholder-shown:font-light peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-[#0891B2] rtl:right-0 rtl:left-auto">
+                      {t('contact.subject')} *
+                    </label>
+                    {errors.subject && <p className="text-[10px] text-red-500 font-bold mt-2">{errors.subject}</p>}
+                  </div>
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t('contact.subject')} *
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.subject}
-                    onChange={(e) => handleInputChange('subject', e.target.value)}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.subject ? 'border-red-500/50' : 'border-border'} bg-card text-foreground focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors`}
-                    required
-                  />
-                  {errors.subject && <p className="text-[10px] text-red-500 font-bold mt-1 px-1">{errors.subject}</p>}
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-foreground mb-2">
-                    {t('booking.message')} *
-                  </label>
+                <div className="relative group/input pt-8">
                   <textarea
+                    id="message"
                     value={formData.message}
                     onChange={(e) => handleInputChange('message', e.target.value)}
-                    rows={6}
-                    className={`w-full px-4 py-3 rounded-lg border ${errors.message ? 'border-red-500/50' : 'border-border'} bg-card text-foreground focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-colors resize-none`}
+                    rows={4}
+                    className="peer w-full bg-transparent border-b border-[#0B1C2D]/10 py-4 text-xl text-[#0B1C2D] focus:border-[#0891B2] outline-none transition-all placeholder-transparent font-light resize-none"
+                    placeholder={t('booking.message')}
                     required
                   />
-                  {errors.message && <p className="text-[10px] text-red-500 font-bold mt-1 px-1">{errors.message}</p>}
+                  <label htmlFor="message" className="absolute left-0 -top-3.5 text-[10px] font-bold text-[#0B1C2D]/40 uppercase tracking-[0.3em] transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-[#0B1C2D]/30 peer-placeholder-shown:top-4 peer-placeholder-shown:font-light peer-focus:-top-3.5 peer-focus:text-[10px] peer-focus:font-bold peer-focus:text-[#0891B2] rtl:right-0 rtl:left-auto">
+                    {t('booking.message')} *
+                  </label>
+                  {errors.message && <p className="text-[10px] text-red-500 font-bold mt-2">{errors.message}</p>}
                 </div>
 
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className="w-full flex items-center justify-center px-6 py-3 bg-primary text-white font-semibold rounded-full hover:shadow-lg hover:shadow-primary/30 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isLoading ? <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-2" /> : null}
-                  {t('contact.send')}
-                  {!isLoading && <Send className={`ml-2 w-5 h-5 ${language === 'ar' ? 'rotate-180 mr-2 ml-0' : ''}`} />}
-                </button>
+                <div className="pt-6">
+                  <button
+                    type="submit"
+                    disabled={isLoading}
+                    className="btn-luxury w-full !py-6 !rounded-[2rem] flex items-center justify-center group overflow-hidden relative"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]" />
+                    {isLoading ? <div className="w-5 h-5 border-2 border-white/20 border-t-white rounded-full animate-spin mr-3 rtl:mr-0 rtl:ml-3" /> : null}
+                    <span className="tracking-[0.3em] font-bold text-[11px] relative z-10">{t('contact.send')}</span>
+                  </button>
+                </div>
               </form>
             </motion.div>
 
-            {/* Contact Information */}
+            {/* Premium Info Sidebar */}
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="space-y-8 rtl:text-right"
+              transition={{ duration: 1.2, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="lg:col-span-5 space-y-10 rtl:text-right"
             >
-              <div>
-                <h2 className="text-3xl mb-6 italic">{t('contact.info.title')}</h2>
-                <p className="text-muted-foreground mb-6">
+              <div className="mb-14">
+                <h2 className="text-4xl md:text-5xl font-serif text-[#0B1C2D] italic mb-6 leading-tight">
+                  {t('contact.info.title')}
+                </h2>
+                <p className="text-[#0B1C2D]/50 text-xl leading-relaxed font-light font-body">
                   {t('contact.info.desc')}
                 </p>
               </div>
 
-              <div className="space-y-4">
-                <div className="flex items-start rtl:flex-row-reverse">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Phone className="w-6 h-6 text-primary" />
+              <div className="flex flex-col gap-6">
+                {/* Phone Card */}
+                <div className="bg-white rounded-[2.5rem] p-8 flex items-center gap-8 shadow-[0_20px_40px_-15px_rgba(11,28,45,0.05)] border border-[#0B1C2D]/[0.03] group hover:-translate-y-1 transition-all duration-500 rtl:flex-row-reverse">
+                  <div className="w-16 h-16 rounded-[1.5rem] bg-[#F8FAFC] flex items-center justify-center flex-shrink-0 group-hover:bg-[#0891B2] transition-colors duration-500">
+                    <Phone className="w-6 h-6 text-[#0891B2] group-hover:text-white transition-colors" />
                   </div>
-                  <div className="ml-4 rtl:ml-0 rtl:mr-4">
-                    <h3 className="font-semibold mb-1">{t('contact.phone.label')}</h3>
-                    <p className="text-muted-foreground" dir="ltr">{state.locations[0]?.phone || '+90 541 339 25 69'}</p>
-                  </div>
-                </div>
-
-                <div className="flex items-start rtl:flex-row-reverse">
-                  <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Mail className="w-6 h-6 text-primary" />
-                  </div>
-                  <div className="ml-4 rtl:ml-0 rtl:mr-4">
-                    <h3 className="font-semibold mb-1">{t('contact.email.label')}</h3>
-                    <p className="text-muted-foreground">{state.locations[0]?.email || 'info@gravity-clinic.com'}</p>
+                  <div>
+                    <h3 className="text-[9px] font-bold text-[#0B1C2D]/30 uppercase tracking-[0.4em] mb-2">{t('contact.phone.label')}</h3>
+                    <p className="text-xl font-serif text-[#0B1C2D] italic" dir="ltr">{state.locations[0]?.phone || sanitizeText('+90 541 339 25 69')}</p>
                   </div>
                 </div>
 
-                <div className="flex items-start rtl:flex-row-reverse">
-                  <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <Clock className="w-6 h-6 text-secondary" />
+                {/* Email Card */}
+                <div className="bg-white rounded-[2.5rem] p-8 flex items-center gap-8 shadow-[0_20px_40px_-15px_rgba(11,28,45,0.05)] border border-[#0B1C2D]/[0.03] group hover:-translate-y-1 transition-all duration-500 rtl:flex-row-reverse">
+                  <div className="w-16 h-16 rounded-[1.5rem] bg-[#F8FAFC] flex items-center justify-center flex-shrink-0 group-hover:bg-[#0891B2] transition-colors duration-500">
+                    <Mail className="w-6 h-6 text-[#0891B2] group-hover:text-white transition-colors" />
                   </div>
-                  <div className="ml-4 rtl:ml-0 rtl:mr-4">
-                    <h3 className="font-semibold mb-1">{t('contact.workingHours')}</h3>
-                    <p className="text-muted-foreground">{state.locations[0]?.hours?.[language] || t('contact.monSat')}</p>
+                  <div>
+                    <h3 className="text-[9px] font-bold text-[#0B1C2D]/30 uppercase tracking-[0.4em] mb-2">{t('contact.email.label')}</h3>
+                    <p className="text-xl font-serif text-[#0B1C2D] italic">{state.locations[0]?.email || sanitizeText('info@gravity-clinic.com')}</p>
                   </div>
                 </div>
-              </div>
 
-              {/* Map Placeholder */}
-              <div className="bg-gray-200 rounded-2xl h-64 flex items-center justify-center overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
-                <img
-                  src={contactBg}
-                  alt="Our Location"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
+                {/* Hours Card */}
+                <div className="bg-white rounded-[2.5rem] p-8 flex items-center gap-8 shadow-[0_20px_40px_-15px_rgba(11,28,45,0.05)] border border-[#0B1C2D]/[0.03] group hover:-translate-y-1 transition-all duration-500 rtl:flex-row-reverse">
+                  <div className="w-16 h-16 rounded-[1.5rem] bg-[#F8FAFC] flex items-center justify-center flex-shrink-0 group-hover:bg-[#0B1C2D] transition-colors duration-500">
+                    <Clock className="w-6 h-6 text-[#0B1C2D]/60 group-hover:text-white transition-colors" />
+                  </div>
+                  <div>
+                    <h3 className="text-[9px] font-bold text-[#0B1C2D]/30 uppercase tracking-[0.4em] mb-2">{t('contact.workingHours')}</h3>
+                    <p className="text-xl font-serif text-[#0B1C2D] italic">{state.locations[0]?.hours?.[language] || t('contact.monSat')}</p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Global Locations */}
-      <section className="py-20 bg-muted/40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl mb-4 italic font-bold text-secondary">{t('contact.locations')}</h2>
+      {/* Global Locations - Editorial Layout */}
+      <section className="py-40 bg-white relative overflow-hidden border-t border-[#0B1C2D]/[0.03]">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <div className="w-12 h-[1px] bg-[#0891B2]/30 mx-auto mb-8"></div>
+            <h2 className="text-5xl md:text-7xl font-serif text-[#0B1C2D] italic mb-6">
+              {t('contact.locations') || 'Global Presence'}
+            </h2>
+            <p className="text-[#0B1C2D]/40 text-xl font-light font-body">Our world-class medical facilities</p>
           </div>
 
           {state.locations.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8 text-sm">{t('contact.loadingLocations') || 'Loading locations…'}</p>
+            <p className="text-center text-[#0B1C2D]/30 py-12 font-body font-light italic">Discovering our world-class facilities…</p>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
               {state.locations.map((location, index) => (
                 <motion.div
                   key={location.id}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 40 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-card text-card-foreground border border-border rounded-2xl shadow-lg p-6 hover:shadow-xl transition-shadow rtl:text-right"
+                  transition={{ duration: 1, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                  className="bg-[#F8FAFC] rounded-[3rem] p-12 rtl:text-right flex flex-col group hover:shadow-[0_40px_80px_-20px_rgba(11,28,45,0.08)] transition-all duration-700"
                 >
-                  <div className="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center mb-4">
-                    <MapPin className="w-6 h-6 text-primary" />
+                  <div className="w-16 h-16 bg-white rounded-3xl flex items-center justify-center mb-10 shadow-sm border border-[#0B1C2D]/[0.03] group-hover:bg-[#0B1C2D] group-hover:border-transparent transition-all duration-500">
+                    <MapPin className="w-6 h-6 text-[#0B1C2D]/40 group-hover:text-white transition-colors" />
                   </div>
-                  <h3 className="text-xl mb-2 font-bold text-secondary">{location.city?.[language] || location.city?.en || ''}</h3>
-                  <p className="text-muted-foreground text-sm mb-4">{location.country?.[language] || location.country?.en || ''}</p>
-                  <div className="space-y-3 text-sm">
-                    <p className="text-foreground/80 leading-relaxed">{location.address?.[language] || location.address?.en || ''}</p>
-                    <p className="text-foreground/80 flex items-center rtl:flex-row-reverse">
-                      <Phone className="w-4 h-4 mr-2 ml-0 rtl:mr-0 rtl:ml-2 text-primary" />
-                      <span dir="ltr">{location.phone || ''}</span>
-                    </p>
-                    <p className="text-foreground/80 flex items-center rtl:flex-row-reverse">
-                      <Mail className="w-4 h-4 mr-2 ml-0 rtl:mr-0 rtl:ml-2 text-primary" />
-                      {location.email || ''}
-                    </p>
-                    <p className="text-foreground/80 flex items-center rtl:flex-row-reverse">
-                      <Clock className="w-4 h-4 mr-2 ml-0 rtl:mr-0 rtl:ml-2 text-muted-foreground" />
-                      {location.hours?.[language] || location.hours?.en || ''}
-                    </p>
+                  <h3 className="text-3xl font-serif text-[#0B1C2D] italic mb-4 leading-tight">{location.city?.[language] || location.city?.en || ''}</h3>
+                  <p className="text-[#0891B2] text-[10px] font-bold uppercase tracking-[0.4em] mb-10">{location.country?.[language] || location.country?.en || ''}</p>
+                  
+                  <div className="space-y-5 pt-8 border-t border-[#0B1C2D]/[0.05] flex-1">
+                    <p className="text-[#0B1C2D]/60 text-base leading-relaxed font-body font-light mb-8">{location.address?.[language] || location.address?.en || ''}</p>
+                    <div className="space-y-4">
+                      <p className="text-[#0B1C2D]/80 text-sm font-medium flex items-center gap-4 rtl:flex-row-reverse">
+                        <Phone className="w-4 h-4 text-[#0891B2]" />
+                        <span dir="ltr">{location.phone || ''}</span>
+                      </p>
+                      <p className="text-[#0B1C2D]/80 text-sm font-medium flex items-center gap-4 rtl:flex-row-reverse">
+                        <Mail className="w-4 h-4 text-[#0891B2]" />
+                        <span>{location.email || ''}</span>
+                      </p>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -357,44 +386,44 @@ export function Contact() {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-secondary mb-4 tracking-tight italic">
-              {t('contact.faq')}
+      {/* Refined Luxury FAQ Section */}
+      <section className="py-40 bg-[#F8FAFC] relative overflow-hidden border-t border-[#0B1C2D]/[0.03]">
+        <div className="max-w-4xl mx-auto px-6 relative z-10">
+          <div className="text-center mb-24">
+            <span className="text-[10px] font-bold uppercase tracking-[0.5em] text-[#0891B2] block mb-6">Patient Inquiries</span>
+            <h2 className="text-5xl md:text-7xl font-serif text-[#0B1C2D] mb-8 italic tracking-tight">
+              {t('contact.faq') || 'Common Questions'}
             </h2>
-            <p className="text-muted-foreground text-lg">{t('contact.faq.subtitle')}</p>
+            <p className="text-[#0B1C2D]/50 text-xl font-light font-body">Everything you need to know about our concierge services.</p>
           </div>
 
           {state.faqs.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8 text-sm">{t('contact.loadingFaqs') || 'Loading FAQs…'}</p>
+            <p className="text-center text-[#0B1C2D]/30 py-12 font-body italic">Compiling frequently asked insights…</p>
           ) : (
-            <div className="space-y-4">
+            <div className="space-y-6">
               {state.faqs.map((faq, index) => (
                 <motion.div
                   key={faq.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`rounded-[2rem] border transition-all duration-300 ${
+                  transition={{ duration: 0.8, delay: index * 0.1 }}
+                  className={`bg-white rounded-[2rem] border transition-all duration-700 overflow-hidden ${
                     openFaq === index
-                      ? 'border-primary bg-primary/5 shadow-xl shadow-primary/5'
-                      : 'border-border bg-card hover:border-primary/50'
+                      ? 'border-[#0891B2]/30 shadow-[0_30px_60px_-15px_rgba(8,145,178,0.1)]'
+                      : 'border-[#0B1C2D]/[0.03] hover:border-[#0891B2]/20 hover:shadow-lg'
                   }`}
                 >
                   <button
                     onClick={() => setOpenFaq(openFaq === index ? null : index)}
                     type="button"
                     aria-expanded={openFaq === index}
-                    aria-controls={`contact_faq_${index}`}
-                    className="w-full px-6 sm:px-8 py-5 sm:py-6 text-left rtl:text-right flex items-center justify-between group"
+                    className="w-full px-10 py-8 text-left rtl:text-right flex items-center justify-between group"
                   >
-                    <span className={`text-base sm:text-lg font-bold transition-colors ${openFaq === index ? 'text-primary' : 'text-secondary font-semibold'} pr-4 rtl:pr-0 rtl:pl-4`}>
+                    <span className={`text-2xl font-serif italic transition-colors duration-500 ${openFaq === index ? 'text-[#0891B2]' : 'text-[#0B1C2D]'} pr-8 rtl:pr-0 rtl:pl-8`}>
                       {faq.question?.[language] || faq.question?.en || ''}
                     </span>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${openFaq === index ? 'bg-primary text-white rotate-180' : 'bg-muted text-muted-foreground'}`}>
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center flex-shrink-0 transition-all duration-700 border ${openFaq === index ? 'bg-[#0891B2] text-white border-[#0891B2] rotate-180' : 'bg-transparent text-[#0B1C2D]/30 border-[#0B1C2D]/10 group-hover:border-[#0891B2]/30 group-hover:text-[#0891B2]'}`}>
                       <ChevronDown className="w-5 h-5" />
                     </div>
                   </button>
@@ -404,11 +433,11 @@ export function Contact() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: 'auto', opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
-                        id={`contact_faq_${index}`}
                       >
-                        <div className="px-6 sm:px-8 pb-6 sm:pb-8 pt-2">
-                          <p className={`text-muted-foreground leading-relaxed text-base sm:text-lg border-primary/20 pl-4 sm:pl-6 rtl:pl-0 rtl:pr-4 rtl:sm:pr-6 ${language === 'ar' ? 'border-r-2' : 'border-l-2'}`}>
+                        <div className="px-10 pb-10 pt-2">
+                          <p className={`text-[#0B1C2D]/60 leading-[1.8] text-xl font-light font-body border-[#0891B2]/30 pl-8 rtl:pl-0 rtl:pr-8 ${language === 'ar' ? 'border-r-2' : 'border-l-2'}`}>
                             {faq.answer?.[language] || faq.answer?.en || ''}
                           </p>
                         </div>

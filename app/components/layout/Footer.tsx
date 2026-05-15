@@ -10,8 +10,10 @@ import {
   Twitter,
   X,
   Linkedin,
-  Youtube
+  Youtube,
+  ArrowRight
 } from 'lucide-react';
+import { sanitizeText } from '../../lib/demoUtils';
 
 const TikTokIcon = (props: any) => (
   <svg
@@ -43,116 +45,70 @@ export function Footer() {
   const { state } = useDashboard();
 
   const getVal = (val: any) => {
-    if (!val) return "";
+    if (!val) return '';
     if (typeof val === 'string') return val;
-    return val[language] || val.en || "";
+    return val[language] || val.en || '';
   };
 
-  const getBrandBaseColor = (platform: string) => {
+  const getSocialHover = (platform: string) => {
     switch (platform) {
-      case 'Instagram':
-        return 'text-[#E4405F]';
-      case 'Facebook':
-        return 'text-[#1877F2]';
-      case 'Linkedin':
-        return 'text-[#0A66C2]';
-      case 'TikTok':
-        return 'text-[#FE2C55]';
-      case 'YouTube':
-        return 'text-[#FF0000]';
-      default:
-        return 'text-primary';
-    }
-  };
-
-  const getBrandHoverEffects = (platform: string) => {
-    switch (platform) {
-      case 'Instagram':
-        return 'hover:shadow-[#E4405F]/40 hover:border-[#E4405F]/40 hover:bg-[#E4405F]/5';
-      case 'Facebook':
-        return 'hover:shadow-[#1877F2]/40 hover:border-[#1877F2]/40 hover:bg-[#1877F2]/5';
-      case 'Linkedin':
-        return 'hover:shadow-[#0A66C2]/40 hover:border-[#0A66C2]/40 hover:bg-[#0A66C2]/5';
-      case 'TikTok':
-        return 'hover:shadow-[#FE2C55]/40 hover:border-[#FE2C55]/40 hover:bg-[#FE2C55]/5';
-      case 'YouTube':
-        return 'hover:shadow-[#FF0000]/40 hover:border-[#FF0000]/40 hover:bg-[#FF0000]/5';
-      default:
-        return 'hover:shadow-primary/30 hover:border-primary/40 hover:bg-primary/5';
+      case 'Instagram': return 'hover:text-[#E4405F]';
+      case 'Facebook':  return 'hover:text-[#1877F2]';
+      case 'Linkedin':  return 'hover:text-[#0A66C2]';
+      case 'TikTok':    return 'hover:text-[#FE2C55]';
+      case 'YouTube':   return 'hover:text-[#FF0000]';
+      default:          return 'hover:text-[#0891B2]';
     }
   };
 
   return (
-    <footer className="bg-secondary text-white pt-24 pb-32 lg:pb-12 overflow-hidden relative" dir={language === 'ar' ? 'rtl' : 'ltr'}>
-      <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-primary/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2" />
-      <div className="absolute bottom-0 left-0 w-1/4 h-1/4 bg-primary/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row lg:justify-between gap-12 sm:gap-16 mb-20 lg:items-start">
-          <div className="space-y-8 max-w-sm">
-            <div className="space-y-6">
-              <div className="bg-white/10 p-4 rounded-3xl inline-block backdrop-blur-md border border-white/10">
-                <img src={state.branding.logo || "/logo"} alt={getVal(state.branding.name)} className="h-10 w-auto" />
-              </div>
-              <p className="text-white/60 leading-relaxed text-sm max-w-xs">
-                {getVal(state.seo.description) || getVal(state.branding.name) || 'World-class medical tourism in Istanbul.'}
-              </p>
-            </div>
-
-            {/* Integrated Social Section */}
-            <div className="bg-white/[0.06] backdrop-blur-2xl border border-white/20 rounded-[2.5rem] p-7 space-y-6 relative group/social overflow-hidden shadow-2xl shadow-black/30">
-              {/* Subtle accent glow */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-[60px] rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none opacity-40" />
-              
-              <div className="space-y-2 relative z-10">
-                <h3 className="text-[11px] font-black uppercase tracking-[0.4em] text-primary/90">
-                  {t('footer.social_follow')}
-                </h3>
-                <p className="text-white/50 text-[12px] font-semibold leading-relaxed">
-                  {t('footer.social_desc')}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-4 relative z-10">
-                {(state.socialLinks.length > 0 ? state.socialLinks : [
-                  { id: 'instagram', platform: 'Instagram', icon_name: 'Instagram', url: 'https://www.instagram.com/gravityclinicofficial/' },
-                  { id: 'facebook', platform: 'Facebook', icon_name: 'Facebook', url: 'https://www.facebook.com/GARVITYCLINICOFFICIAL/' },
-                  { id: 'tiktok', platform: 'TikTok', icon_name: 'TikTok', url: 'https://www.tiktok.com/@gravityclinic?_r=1&_t=ZS-95au6KjxlDu' },
-                  { id: 'youtube', platform: 'YouTube', icon_name: 'YouTube', url: 'https://www.youtube.com/channel/UCpeRizxKJ-rerTR8dxgdyYg' }
-                ]).filter(l => l.is_active !== false).map((link, i) => {
-                  const Icon = iconMap[link.icon_name] || iconMap[link.platform] || Instagram;
-
-                  return (
-                    <a
-                      key={link.id || `social-${i}-${link.platform}`}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={`group/icon w-11 h-11 rounded-2xl bg-white/[0.08] backdrop-blur-md flex items-center justify-center border border-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.08] hover:shadow-xl active:scale-95 ${getBrandHoverEffects(link.platform)}`}
-                      aria-label={`Follow Gravity Clinic on ${link.platform}`}
-                      title={link.platform}
-                    >
-                      <Icon
-                        className={`w-5 h-5 transition-all duration-300 ${getBrandBaseColor(link.platform)} opacity-90 group-hover/icon:scale-110 group-hover/icon:opacity-100 group-hover/icon:brightness-125`}
-                      />
-                    </a>
-                  );
-                })}
-              </div>
-            </div>
+    <footer
+      className="bg-[#0B1C2D] pt-32 pb-12 lg:pt-48"
+      dir={language === 'ar' ? 'rtl' : 'ltr'}
+    >
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        
+        {/* Editorial Statement & Logo Row */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-16 mb-32">
+          <div className="max-w-3xl">
+            <h2 className="text-5xl md:text-7xl lg:text-[5.5rem] font-serif italic text-white leading-[1.1] tracking-tight mb-8">
+              {language === 'ar' ? 'فن التميز الطبي.' : 'The Art of Medical Excellence.'}
+            </h2>
+            <p className="text-white/40 text-xl font-body font-light max-w-xl leading-relaxed">
+              {getVal(state.seo.description) || getVal(state.branding.name) || 'Experience absolute luxury and world-class concierge healthcare in the heart of Istanbul.'}
+            </p>
           </div>
+          <div className="flex-shrink-0">
+            <img
+              src={state.branding.logo || '/logo'}
+              alt={getVal(state.branding.name)}
+              className="h-12 w-auto opacity-90"
+            />
+          </div>
+        </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-y-12 gap-x-8 flex-1 lg:justify-center">
+        {/* Structural Divider */}
+        <div className="w-full h-[1px] bg-white/10 mb-24"></div>
+
+        {/* Minimalist Data Columns */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-12 mb-32">
+          
+          {/* Navigation */}
+          <div className="lg:col-span-5 grid grid-cols-2 gap-12">
             {state.navLinks.map((section, idx) => (
-              <div key={section.id || `footer-sec-${idx}`} className="min-w-[120px]">
-                <h3 className="text-[10px] font-black uppercase tracking-[0.4em] mb-8 text-primary">
+              <div key={section.id || `footer-sec-${idx}`}>
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0891B2] mb-8">
                   {getVal(section.label)}
                 </h3>
                 <ul className="space-y-4">
                   {section.children?.map((item: any, cidx: number) => (
                     <li key={item.id || item.slug || `footer-item-${idx}-${cidx}`}>
-                      <Link to={item.path || '#'} className="text-white/40 hover:text-white hover:translate-x-1 transition-all inline-block text-[13px] font-bold">
+                      <Link
+                        to={item.path || '#'}
+                        className="text-white/50 hover:text-white text-lg font-body font-light transition-all duration-300 inline-flex items-center group"
+                      >
                         {getVal(item.label)}
+                        <ArrowRight className={`w-4 h-4 ml-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-[#0891B2] ${language === 'ar' ? 'rotate-180 mr-2 ml-0 translate-x-2 group-hover:-translate-x-0' : ''}`} />
                       </Link>
                     </li>
                   ))}
@@ -161,63 +117,94 @@ export function Footer() {
             ))}
           </div>
 
-          <div className="w-full lg:w-auto lg:min-w-[280px]">
-            <div className="bg-white/5 p-8 rounded-[2.5rem] border border-white/5 backdrop-blur-3xl h-full">
-              <h3 className="text-sm font-black uppercase tracking-[0.2em] mb-8 text-white">{t('footer.contact')}</h3>
-              <ul className="space-y-8 lg:space-y-6">
-                {[
-                  {
-                    id: 'whatsapp',
-                    icon: Phone,
-                    label: t('footer.whatsapp'),
-                    value: state.whatsapp.phoneNumber || state.locations[0]?.phone
-                  },
-                  {
-                    id: 'location',
-                    icon: MapPin,
-                    label: getVal(state.locations[0]?.city) || t('footer.istanbul'),
-                    value: getVal(state.locations[0]?.address) || t('footer.address') || 'Istanbul, Turkey'
-                  },
-                  ...(state.locations[0]?.email
-                    ? [{
+          {/* Contact Details */}
+          <div className="lg:col-span-4">
+            <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0891B2] mb-8">
+              {t('footer.contact') || 'INQUIRIES'}
+            </h3>
+            <ul className="space-y-8">
+              {[
+                {
+                  id: 'whatsapp',
+                  label: t('footer.whatsapp') || 'WhatsApp / Phone',
+                  value: state.whatsapp.phoneNumber || state.locations[0]?.phone
+                },
+                ...(state.locations[0]?.email
+                  ? [{
                       id: 'email',
-                      icon: Mail,
-                      label: t('footer.email') || 'Email Us',
+                      label: t('footer.email') || 'Email',
                       value: state.locations[0].email
                     }]
-                    : [])
-                ].map((item) => (
-                  <li key={item.id} className="flex flex-col items-start gap-4 group">
-                    <div className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-primary/20 transition-all duration-300">
-                      <item.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-[10px] text-primary font-black uppercase tracking-[0.4em] mb-2 opacity-80">
-                        {item.label}
-                      </p>
-                      <p className={`font-bold text-white transition-colors duration-300 ${item.icon === Phone ? 'text-lg sm:text-xl whitespace-nowrap' : 'text-sm leading-relaxed'}`}>
-                        {item.value ?? ''}
-                      </p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                  : [])
+              ].map((item) => (
+                <li key={item.id} className="group">
+                  <p className="text-[9px] font-bold uppercase tracking-[0.3em] text-white/30 mb-2">
+                    {item.label}
+                  </p>
+                  <p className="text-white/80 font-serif italic text-2xl group-hover:text-[#0891B2] transition-colors duration-500 cursor-pointer" dir={item.id === 'whatsapp' ? 'ltr' : 'auto'}>
+                    {item.value ?? ''}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Headquarters & Socials */}
+          <div className="lg:col-span-3 flex flex-col justify-between h-full">
+            <div>
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0891B2] mb-8">
+                {t('footer.istanbul') || 'HEADQUARTERS'}
+              </h3>
+              <p className="text-white/50 text-lg font-body font-light leading-relaxed mb-6">
+                {getVal(state.locations[0]?.address) || t('footer.address') || 'Istanbul, Turkey'}
+              </p>
+            </div>
+
+            <div className="mt-12 lg:mt-0">
+              <h3 className="text-[10px] font-bold uppercase tracking-[0.4em] text-[#0891B2] mb-6">
+                {t('footer.social_follow') || 'CONNECT'}
+              </h3>
+              <div className="flex items-center gap-6">
+                {(state.socialLinks.length > 0 ? state.socialLinks : [
+                  { id: 'instagram', platform: 'Instagram', icon_name: 'Instagram', url: 'https://www.instagram.com/lumoclinic/' },
+                  { id: 'facebook',  platform: 'Facebook',  icon_name: 'Facebook',  url: 'https://www.facebook.com/lumoclinic/' },
+                  { id: 'tiktok',    platform: 'TikTok',    icon_name: 'TikTok',    url: 'https://www.tiktok.com/@lumoclinic' },
+                  { id: 'youtube',   platform: 'YouTube',   icon_name: 'YouTube',   url: 'https://www.youtube.com/channel/UCpeRizxKJ-rerTR8dxgdyYg' }
+                ]).filter(l => l.is_active !== false).map((link, i) => {
+                  const Icon = iconMap[link.icon_name] || iconMap[link.platform] || Instagram;
+                  return (
+                    <a
+                      key={link.id || `social-${i}`}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`text-white/40 transition-all duration-300 hover:-translate-y-1 ${getSocialHover(link.platform)}`}
+                      aria-label={link.platform}
+                      title={link.platform}
+                    >
+                      <Icon className="w-6 h-6" />
+                    </a>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
 
+        {/* Bottom copyright row */}
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <p className="text-white/30 text-[10px] font-bold uppercase tracking-[0.3em] text-center md:text-left">
+            {t('footer.copyright')}
+          </p>
 
-
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col md:flex-row items-center gap-6 md:gap-10 text-center md:text-left">
-            <div className="text-white/30 text-[11px] font-medium tracking-wide">
-              {t('footer.copyright')}
-            </div>
-
-            <div className="flex gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-white/20">
-              <a href="#" className="hover:text-primary transition-colors">{t('footer.privacy')}</a>
-              <a href="#" className="hover:text-primary transition-colors">{t('footer.terms')}</a>
-            </div>
+          <div className="flex items-center gap-8 text-[10px] font-bold uppercase tracking-[0.3em]">
+            <a href="#" className="text-white/30 hover:text-[#0891B2] transition-colors duration-500">
+              {t('footer.privacy')}
+            </a>
+            <span className="w-1 h-1 rounded-full bg-white/10"></span>
+            <a href="#" className="text-white/30 hover:text-[#0891B2] transition-colors duration-500">
+              {t('footer.terms')}
+            </a>
           </div>
         </div>
       </div>
