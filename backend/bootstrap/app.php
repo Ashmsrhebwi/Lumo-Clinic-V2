@@ -17,6 +17,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
     $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
 
+    // Register admin role middleware
+    $middleware->alias([
+        'admin' => \App\Http\Middleware\EnsureAdminUser::class,
+    ]);
+
     $middleware->redirectGuestsTo(function (Request $request) {
         if ($request->expectsJson() || $request->is('api/*')) {
             abort(response()->json(['message' => 'Unauthenticated.'], 401));

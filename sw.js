@@ -1,4 +1,4 @@
-const CACHE_NAME = 'gravity-clinic-cache-v1';
+const CACHE_NAME = 'Lumo-Clinic-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',

@@ -40,9 +40,9 @@ Result::create([
     'after_media_id' => $afterMedia->id,
     'patient_name' => ['en' => 'Sarah J.', 'ar' => 'سارة ج.', 'fr' => 'Sarah J.', 'ru' => 'Сара Дж.'],
     'story' => [
-        'en' => 'My confidence has completely changed after the Hollywood Smile procedure at Gravity Clinic.',
+        'en' => 'My confidence has completely changed after the Hollywood Smile procedure at Lumo Clinic.',
         'ar' => 'لقد تغيرت ثقتي بنفسي تمامًا بعد إجراء ابتسامة هوليود في جرافتي كلينك.',
-        'fr' => 'Ma confiance a complètement changé après la procédure Hollywood Smile à la Gravity Clinic.',
+        'fr' => 'Ma confiance a complètement changé après la procédure Hollywood Smile à la Lumo Clinic.',
         'ru' => 'Моя уверенность полностью изменилась после процедуры "Голливудская улыбка" в клинике "Гравити".'
     ],
     'is_active' => true

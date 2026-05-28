@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         );
 
         Admin::updateOrCreate(
-            ['email' => 'A.agha@gravity-clinic.com'],
+            ['email' => 'A.agha@Lumo-clinic.com'],
             ['password' => Hash::make('AAGC@8761899')]
         );
 
@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
                 'enabled' => true,
             ],
             'ui_settings' => [
-                'primaryColor'    => '#F97316',
+                'primaryColor'    => '#0484ba',
                 'secondaryColor'  => '#1A1842',
                 'fontFamily'      => 'Inter',
                 'buttonRadius'    => '1rem',
@@ -83,10 +83,8 @@ class DatabaseSeeder extends Seeder
                 ['icon' => 'Package', 'title' => ['en' => 'All-Inclusive Packages', 'ar' => 'باقات شاملة'], 'desc' => ['en' => 'Treatment, accommodation, and transfers included.', 'ar' => 'العلاج والإقامة والانتقالات مشمولة.']],
             ],
             'social_links' => [
-                ['platform' => 'Instagram', 'url' => 'https://www.instagram.com/gravityclinicofficial/', 'iconName' => 'Instagram'],
-                ['platform' => 'Facebook', 'url' => 'https://www.facebook.com/GARVITYCLINICOFFICIAL/', 'iconName' => 'Facebook'],
-                ['platform' => 'TikTok', 'url' => 'https://www.tiktok.com/@gravityclinic?_r=1&_t=ZS-95au6KjxlDu', 'iconName' => 'TikTok'],
-                ['platform' => 'YouTube', 'url' => 'https://www.youtube.com/channel/UCpeRizxKJ-rerTR8dxgdyYg', 'iconName' => 'YouTube'],
+                ['platform' => 'Instagram', 'url' => 'https://www.instagram.com/lumo.clinic?igsh=MTUyN2FoOGN0Mnpobw==', 'iconName' => 'Instagram'],
+                ['platform' => 'Facebook', 'url' => 'https://www.facebook.com/share/17m54mzFqv/', 'iconName' => 'Facebook'],
             ]
         ];
 

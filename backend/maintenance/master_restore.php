@@ -54,7 +54,7 @@ foreach ($required as $data) {
     $t = Treatment::updateOrCreate(['slug' => $data['slug']], [
         'title' => $data['title'],
         'category' => $data['category'],
-        'description' => ['en' => "Professional {$data['title']['en']} services at Gravity Clinic.", 'ar' => '', 'fr' => '', 'ru' => ''],
+        'description' => ['en' => "Professional {$data['title']['en']} services at Lumo Clinic.", 'ar' => '', 'fr' => '', 'ru' => ''],
         'duration' => ['en' => '1 session', 'ar' => '', 'fr' => '', 'ru' => ''],
         'success_rate' => 99,
         'is_active' => true

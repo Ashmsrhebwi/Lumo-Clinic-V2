@@ -3,7 +3,7 @@
 $host = '127.0.0.1';
 $user = 'root';
 $pass = '';
-$newDb = 'gravity_clinic_rebuilt';
+$newDb = 'Lumo_clinic_rebuilt';
 
 try {
     $pdo = new PDO("mysql:host=$host", $user, $pass);

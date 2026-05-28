@@ -1,5 +1,9 @@
 <?php
-$conn = mysqli_connect('127.0.0.1', 'root', '', 'gravity_clinic_new');
+// MAINTENANCE SCRIPT ONLY - Not used in production
+// This script is for database debugging and maintenance purposes only
+// DO NOT use in production code
+
+$conn = mysqli_connect('127.0.0.1', 'root', '', 'Lumo_clinic_new');
 if (!$conn) die("Connection failed: " . mysqli_connect_error());
 
 echo "=== TREATMENTS ===\n";

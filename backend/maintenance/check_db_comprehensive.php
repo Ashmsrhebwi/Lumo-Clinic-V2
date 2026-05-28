@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('127.0.0.1', 'root', '', 'gravity_clinic_new');
+$conn = mysqli_connect('127.0.0.1', 'root', '', 'Lumo_clinic_new');
 if (!$conn) die("Connection failed: " . mysqli_connect_error());
 
 $result = mysqli_query($conn, "SELECT COUNT(*) as count FROM treatments");

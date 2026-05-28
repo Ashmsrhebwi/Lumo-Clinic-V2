@@ -1,5 +1,5 @@
 <?php
-$conn = mysqli_connect('127.0.0.1', 'root', '', 'gravity_clinic_new');
+$conn = mysqli_connect('127.0.0.1', 'root', '', 'Lumo_clinic_new');
 
 $expected = ['dental-implant', 'hollywood-smile', 'male-hair-transplant', 'female-hair-transplant', 'beard-moustache-transplant', 'eyebrow-transplant'];
 foreach ($expected as $slug) {

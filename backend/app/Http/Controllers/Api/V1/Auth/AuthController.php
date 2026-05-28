@@ -235,8 +235,12 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
+        // Revoke the current access token to prevent reuse
+        // This ensures the token cannot be used after logout
+        $request->user()->currentAccessToken()->delete();
+
         return response()->json(['message' => 'Logged out successfully']);
     }
 }

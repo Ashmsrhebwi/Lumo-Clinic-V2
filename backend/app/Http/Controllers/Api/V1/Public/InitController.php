@@ -16,6 +16,7 @@ use App\Models\Article;
 use App\Models\Doctor;
 use App\Models\Result;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class InitController extends Controller
 {
@@ -26,8 +27,11 @@ class InitController extends Controller
      */
     public function initFull()
     {
+        // SECURITY: Removed debug log exposing sensitive database data
+        // Original: Log::error('API_DEBUG_SECTIONS', ['sections' => Setting::where('key', 'sections')->first()]);
+
         // 1. Settings & Branding
-        $settingsRaw = Setting::whereIn('key', ['branding', 'whatsapp', 'ui_settings', 'settings', 'seo', 'hero', 'sections', 'why_choose_us_features'])->pluck('value', 'key');
+        $settingsRaw = Setting::pluck('value', 'key');
         $settings = $settingsRaw->map(function ($value, $key) {
             if ($key === 'branding' && isset($value['name']) && is_string($value['name'])) {
                 $value['name'] = ['en' => $value['name'], 'ar' => $value['name'], 'fr' => $value['name'], 'ru' => $value['name']];
@@ -136,9 +140,9 @@ class InitController extends Controller
     public function index()
     {
         // Branding, WhatsApp, Theme/UI from Settings
-        $settings = Setting::whereIn('key', ['branding', 'whatsapp', 'ui_settings', 'settings', 'seo', 'hero', 'sections', 'why_choose_us_features'])->pluck('value', 'key');
+        $settingsRaw = Setting::pluck('value', 'key');
 
-        $resolvedSettings = $settings->map(function ($value, $key) {
+        $resolvedSettings = $settingsRaw->map(function ($value, $key) {
             if ($key === 'branding' && isset($value['name']) && is_string($value['name'])) {
                 // Final Fix: branding.name must be multilingual JSON
                 $value['name'] = [
@@ -167,7 +171,7 @@ class InitController extends Controller
 
         return response()->json([
             'branding' => $resolvedSettings['branding'] ?? [
-                'name' => ['en' => 'Gravity Clinic', 'ar' => 'جرافيتي كلينيك', 'fr' => 'Clinique Gravity', 'ru' => 'Клиника Гравити'],
+                'name' => ['en' => 'Lumo Clinic', 'ar' => 'جرافيتي كلينيك', 'fr' => 'Clinique Lumo', 'ru' => 'Клиника Гравити'],
                 'logo' => null
             ],
             'settings' => $mergedSettings,

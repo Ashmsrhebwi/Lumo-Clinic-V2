@@ -28,8 +28,22 @@ class SettingController extends Controller
         foreach ($request->settings as $item) {
             $key = $item['key'] ?? null;
             $value = $item['value'] ?? null;
-            if ($key) {
-                Setting::updateOrCreate(['key' => $key], ['value' => $value]);
+            
+            if ($key && $value !== null) {
+                $setting = Setting::find($key);
+                
+                if ($setting && is_array($setting->value) && is_array($value)) {
+                    $mergedValue = $setting->value;
+                    foreach ($value as $k => $v) {
+                        if ($v !== null) {
+                            $mergedValue[$k] = $v;
+                        }
+                    }
+                    $setting->value = $mergedValue;
+                    $setting->save();
+                } else {
+                    Setting::updateOrCreate(['key' => $key], ['value' => $value]);
+                }
             }
         }
 

@@ -3,87 +3,87 @@
     "broken": [
         {
             "name": "admins",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.admins' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `admins` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.admins' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `admins` LIMIT 1)"
         },
         {
             "name": "articles",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.articles' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `articles` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.articles' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `articles` LIMIT 1)"
         },
         {
             "name": "cache",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.cache' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `cache` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.cache' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `cache` LIMIT 1)"
         },
         {
             "name": "cache_locks",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.cache_locks' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `cache_locks` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.cache_locks' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `cache_locks` LIMIT 1)"
         },
         {
             "name": "doctors",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.doctors' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `doctors` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.doctors' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `doctors` LIMIT 1)"
         },
         {
             "name": "faqs",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.faqs' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `faqs` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.faqs' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `faqs` LIMIT 1)"
         },
         {
             "name": "leads",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.leads' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `leads` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.leads' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `leads` LIMIT 1)"
         },
         {
             "name": "locations",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.locations' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `locations` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.locations' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `locations` LIMIT 1)"
         },
         {
             "name": "media",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.media' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `media` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.media' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `media` LIMIT 1)"
         },
         {
             "name": "migrations",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.migrations' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `migrations` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.migrations' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `migrations` LIMIT 1)"
         },
         {
             "name": "navbar_items",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.navbar_items' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `navbar_items` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.navbar_items' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `navbar_items` LIMIT 1)"
         },
         {
             "name": "navbar_sections",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.navbar_sections' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `navbar_sections` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.navbar_sections' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `navbar_sections` LIMIT 1)"
         },
         {
             "name": "personal_access_tokens",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.personal_access_tokens' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `personal_access_tokens` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.personal_access_tokens' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `personal_access_tokens` LIMIT 1)"
         },
         {
             "name": "process_steps",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.process_steps' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `process_steps` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.process_steps' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `process_steps` LIMIT 1)"
         },
         {
             "name": "results",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.results' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `results` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.results' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `results` LIMIT 1)"
         },
         {
             "name": "sessions",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.sessions' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `sessions` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.sessions' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `sessions` LIMIT 1)"
         },
         {
             "name": "settings",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.settings' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `settings` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.settings' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `settings` LIMIT 1)"
         },
         {
             "name": "social_links",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.social_links' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `social_links` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.social_links' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `social_links` LIMIT 1)"
         },
         {
             "name": "stats",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.stats' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `stats` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.stats' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `stats` LIMIT 1)"
         },
         {
             "name": "testimonials",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.testimonials' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `testimonials` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.testimonials' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `testimonials` LIMIT 1)"
         },
         {
             "name": "treatments",
-            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'gravity_clinic_new.treatments' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: gravity_clinic_new, SQL: SELECT 1 FROM `treatments` LIMIT 1)"
+            "error": "SQLSTATE[42S02]: Base table or view not found: 1932 Table 'Lumo_clinic_new.treatments' doesn't exist in engine (Connection: mysql, Host: 127.0.0.1, Port: 3306, Database: Lumo_clinic_new, SQL: SELECT 1 FROM `treatments` LIMIT 1)"
         }
     ]
 }

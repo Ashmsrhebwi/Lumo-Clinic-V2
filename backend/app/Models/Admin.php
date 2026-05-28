@@ -12,6 +12,7 @@ class Admin extends Authenticatable
 
     protected $fillable = [
         'email',
+        'role',
         'password',
         'otp_code',
         'otp_expires_at',

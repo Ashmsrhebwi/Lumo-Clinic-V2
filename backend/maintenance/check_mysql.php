@@ -1,6 +1,6 @@
 <?php
 $host = '127.0.0.1';
-$db   = 'gravity_clinic_new';
+$db   = 'Lumo_clinic_new';
 $user = 'root';
 $pass = '';
 $charset = 'utf8mb4';

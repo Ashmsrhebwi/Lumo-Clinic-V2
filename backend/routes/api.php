@@ -35,11 +35,12 @@ use App\Http\Controllers\Api\V1\Admin\StatController;
 | Authentication Routes
 |--------------------------------------------------------------------------
 */
-Route::post('/login', [AuthController::class, 'login']);
-Route::post('/verify-otp', [AuthController::class, 'verifyOtp']);
-Route::post('/resend-otp', [AuthController::class, 'resendOtp']);
-Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
-Route::post('/reset-password', [AuthController::class, 'resetPassword']);
+// SECURITY: Rate limit auth endpoints to prevent brute force attacks
+Route::post('/login', [AuthController::class, 'login'])->middleware('throttle:5,1');
+Route::post('/verify-otp', [AuthController::class, 'verifyOtp'])->middleware('throttle:10,1');
+Route::post('/resend-otp', [AuthController::class, 'resendOtp'])->middleware('throttle:3,1');
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->middleware('throttle:5,1');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->middleware('throttle:5,1');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
@@ -79,7 +80,7 @@ Route::prefix('public')->group(function () {
 | Admin Routes (Dashboard-Facing)
 |--------------------------------------------------------------------------
 */
-Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
+Route::middleware(['auth:sanctum', 'admin', 'throttle:60,1'])->prefix('admin')->group(function () {
     Route::apiResource('treatments', TreatmentController::class);
     Route::apiResource('testimonials', TestimonialController::class);
     
@@ -103,8 +104,9 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::post('/settings/batch', [SettingController::class, 'updateBatch']);
     
     // Alias for 'media/upload' as 'upload'
-    Route::post('/media/upload', [MediaController::class, 'upload']);
-    Route::post('/upload', [MediaController::class, 'upload']);
+    // SECURITY: Rate limit uploads to prevent abuse and DoS
+    Route::post('/media/upload', [MediaController::class, 'upload'])->middleware('throttle:20,1');
+    Route::post('/upload', [MediaController::class, 'upload'])->middleware('throttle:20,1');
     
     Route::get('/media', [MediaController::class, 'index']);
     Route::delete('/media/{id}', [MediaController::class, 'destroy']);
