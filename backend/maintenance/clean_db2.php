@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Storage;
 $mediaItems = Media::all();
 $brokenMediaCount = 0;
 foreach ($mediaItems as $media) {
-    if (!$media->file_path || !Storage::disk('public')->exists($media->file_path)) {
+    if (!$media->path || !Storage::disk('public')->exists($media->path)) {
         $brokenMediaCount++;
         $media->delete();
     }

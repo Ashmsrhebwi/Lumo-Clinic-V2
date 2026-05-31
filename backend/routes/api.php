@@ -55,7 +55,7 @@ Route::middleware('auth:sanctum')->group(function () {
 Route::prefix('public')->group(function () {
     Route::get('/settings', [InitController::class, 'index']);
     Route::get('/nav-links', [InitController::class, 'navLinks']);
-    Route::get('/init-full', [InitController::class, 'initFull']);
+    Route::get('/init-full', [InitController::class, 'initFull']); // legacy fallback; prefer smaller public endpoints for lazy hydration
     
     Route::get('/treatments', [PublicTreatmentController::class, 'index']);
     Route::get('/treatments/{slug}', [PublicTreatmentController::class, 'show']);
@@ -81,6 +81,7 @@ Route::prefix('public')->group(function () {
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth:sanctum', 'admin', 'throttle:60,1'])->prefix('admin')->group(function () {
+    Route::post('/clear-cache', [InitController::class, 'clearCache']);
     Route::apiResource('treatments', TreatmentController::class);
     Route::apiResource('testimonials', TestimonialController::class);
     

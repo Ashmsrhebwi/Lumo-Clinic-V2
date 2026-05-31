@@ -51,7 +51,7 @@ ProcessStep::whereIn('id', $psIds)->delete();
 $mediaItems = Media::all();
 $brokenMediaCount = 0;
 foreach ($mediaItems as $media) {
-    if (!Storage::disk('public')->exists($media->file_path)) {
+    if (!Storage::disk('public')->exists($media->path)) {
         $brokenMediaCount++;
         $media->delete();
     }
